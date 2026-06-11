@@ -1,4 +1,4 @@
-const CACHE_NAME = "liver-ire-consensus-pwa-v1";
+const CACHE_NAME = "liver-ire-consensus-pwa-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",

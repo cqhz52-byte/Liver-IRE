@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f766e">
+  <meta name="theme-color" content="#9f1239">
   <meta name="description" content="肝癌不可逆电穿孔消融治疗专家共识与临床实践指南知识库、考试题库与 SOP 操作流程 PWA。">
   <meta name="keywords" content="IRE, 肝癌, 肝脏恶性肿瘤, 纳米刀, 专家共识, 临床实践指南, SOP, 考试题库">
   <meta property="og:type" content="website">
@@ -32,21 +32,21 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f6f8f7;
+      --bg: #fff7ed;
       --paper: #ffffff;
-      --ink: #17211f;
-      --muted: #60706c;
-      --line: #dce5e2;
-      --teal: #0f766e;
-      --teal-2: #14b8a6;
-      --blue: #2563eb;
-      --amber: #d97706;
-      --rose: #e11d48;
-      --mint: #dcfce7;
-      --sky: #dbeafe;
+      --ink: #241613;
+      --muted: #715a50;
+      --line: #ead7c8;
+      --teal: #9f1239;
+      --teal-2: #f97316;
+      --blue: #4f46e5;
+      --amber: #b45309;
+      --rose: #be123c;
+      --mint: #fee2e2;
+      --sky: #ede9fe;
       --sand: #fef3c7;
       --pink: #ffe4e6;
-      --shadow: 0 10px 28px rgba(22, 39, 37, .06);
+      --shadow: 0 10px 28px rgba(75, 34, 18, .08);
       --radius: 8px;
       font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, Segoe UI, sans-serif;
     }
@@ -61,7 +61,7 @@
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(180deg, #e8f6f3 0, rgba(232, 246, 243, 0) 360px),
+        linear-gradient(180deg, #ffedd5 0, rgba(255, 237, 213, 0) 360px),
         var(--bg);
       letter-spacing: 0;
       overflow-x: hidden;
@@ -116,8 +116,8 @@
       height: 42px;
       border-radius: var(--radius);
       color: white;
-      background: linear-gradient(135deg, #0f766e, #2563eb);
-      box-shadow: 0 10px 24px rgba(15, 118, 110, .25);
+      background: linear-gradient(135deg, #9f1239, #f97316);
+      box-shadow: 0 10px 24px rgba(159, 18, 57, .24);
     }
 
     .brand-mark svg,
@@ -163,7 +163,7 @@
       min-height: 44px;
       padding: 10px 14px 10px 40px;
       color: var(--ink);
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       outline: none;
@@ -204,7 +204,7 @@
     .primary-btn {
       color: white;
       background: var(--teal);
-      box-shadow: 0 10px 22px rgba(15, 118, 110, .18);
+      box-shadow: 0 10px 22px rgba(159, 18, 57, .18);
     }
 
     .ghost-btn,
@@ -248,14 +248,14 @@
 
     .side a:hover,
     .side a.active {
-      background: #ecfdf5;
-      color: #0f766e;
+      background: #fff1f2;
+      color: var(--teal);
     }
 
     .progress-box {
       padding: 14px;
       margin-bottom: 10px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -273,14 +273,14 @@
       width: 100%;
       height: 10px;
       overflow: hidden;
-      background: #e5eee9;
+      background: #f5dfd0;
       border-radius: 999px;
     }
 
     .progress-fill {
       width: 0;
       height: 100%;
-      background: linear-gradient(90deg, var(--teal), var(--blue));
+      background: linear-gradient(90deg, var(--teal), var(--teal-2), var(--blue));
       transition: width .25s ease;
     }
 
@@ -321,8 +321,8 @@
       padding: clamp(20px, 5vw, 46px);
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(15, 118, 110, .92), rgba(38, 94, 142, .86)),
-        #0f766e;
+        linear-gradient(135deg, rgba(127, 29, 29, .94), rgba(180, 83, 9, .9) 52%, rgba(76, 29, 149, .86)),
+        #7f1d1d;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
@@ -363,7 +363,7 @@
       gap: 8px;
       min-height: 44px;
       padding: 12px 16px;
-      color: #073b36;
+      color: #4a160f;
       background: white;
       border-radius: var(--radius);
       text-decoration: none;
@@ -387,7 +387,7 @@
       display: block;
       min-height: 118px;
       padding: 16px;
-      color: #123b36;
+      color: #4a160f;
       background: rgba(255, 255, 255, .86);
       border: 1px solid rgba(255, 255, 255, .7);
       border-radius: var(--radius);
@@ -401,7 +401,7 @@
     }
 
     .module-link span {
-      color: #315b55;
+      color: #6b3f2d;
       line-height: 1.55;
       font-size: 14px;
     }
@@ -468,7 +468,7 @@
       align-items: flex-start;
       padding: 14px;
       margin-top: 18px;
-      color: #0b3d38;
+      color: #4a160f;
       background: rgba(255, 255, 255, .78);
       border-radius: var(--radius);
     }
@@ -547,16 +547,36 @@
       min-height: 26px;
       padding: 5px 8px;
       margin-bottom: 10px;
-      color: #075e55;
-      background: #ccfbf1;
+      color: #9f1239;
+      background: #ffe4e6;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
     }
 
-    .tag.strong { color: #1e3a8a; background: #dbeafe; }
+    .tag.strong { color: #4c1d95; background: #ede9fe; }
     .tag.warn { color: #92400e; background: #fef3c7; }
     .tag.danger { color: #9f1239; background: #ffe4e6; }
+
+    .en-line {
+      display: block;
+      margin-top: 5px;
+      color: #8a6c5d;
+      font-size: .88em;
+      line-height: 1.55;
+    }
+
+    body.hide-en .en-line {
+      display: none;
+    }
+
+    .lang-toggle {
+      min-width: 72px;
+      color: var(--teal);
+      background: #fff1f2;
+      border-color: #fecdd3;
+      font-weight: 800;
+    }
 
     .favorite {
       float: right;
@@ -565,7 +585,7 @@
       width: 38px;
       height: 38px;
       color: var(--muted);
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -651,7 +671,7 @@
       gap: 12px;
       align-items: start;
       padding: 14px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -661,8 +681,8 @@
       place-items: center;
       width: 42px;
       height: 42px;
-      color: #075e55;
-      background: #ccfbf1;
+      color: #9f1239;
+      background: #ffe4e6;
       border-radius: var(--radius);
       font-size: 13px;
     }
@@ -724,8 +744,8 @@
     .med-note {
       padding: 14px;
       margin-bottom: 14px;
-      color: #123b36;
-      background: #f8fbfa;
+      color: #4a160f;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       line-height: 1.7;
@@ -747,7 +767,7 @@
       position: relative;
       min-width: 0;
       padding: 14px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -760,7 +780,7 @@
       margin-bottom: 10px;
       background: var(--teal);
       border-radius: 50%;
-      box-shadow: 0 0 0 5px #ccfbf1;
+      box-shadow: 0 0 0 5px #ffe4e6;
     }
 
     .timeline-step time,
@@ -804,7 +824,7 @@
       align-items: flex-start;
       gap: 10px;
       padding: 12px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -829,7 +849,7 @@
       gap: 14px;
       align-items: center;
       padding: 14px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -839,8 +859,8 @@
       width: min(260px, 100%);
       aspect-ratio: 1 / 1;
       margin: auto;
-      background: #eefbf8;
-      border: 2px solid #9de3d9;
+      background: #fff1e8;
+      border: 2px solid #fdba74;
       border-radius: 50%;
     }
 
@@ -854,7 +874,7 @@
     .margin-zone {
       position: absolute;
       inset: 25%;
-      border: 2px dashed #0f766e;
+      border: 2px dashed var(--teal);
       border-radius: 50%;
     }
 
@@ -862,7 +882,7 @@
       position: absolute;
       width: 10px;
       height: 10px;
-      background: #2563eb;
+      background: var(--blue);
       border: 2px solid white;
       border-radius: 50%;
       box-shadow: 0 0 0 2px rgba(37, 99, 235, .18);
@@ -873,6 +893,77 @@
     .pin.p3 { top: 66%; left: 67%; }
     .pin.p4 { top: 36%; left: 72%; }
 
+    .needle-guide {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .needle-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .needle-rule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .needle-param-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .needle-plan-card,
+    .needle-rule-card,
+    .needle-param-card {
+      padding: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .needle-plan-card {
+      border-top: 4px solid var(--teal-2);
+    }
+
+    .needle-plan-card strong,
+    .needle-rule-card strong,
+    .needle-param-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .needle-plan-card span,
+    .needle-rule-card span,
+    .needle-param-card span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .source-pill {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 24px;
+      align-items: center;
+      padding: 4px 8px;
+      margin-bottom: 8px;
+      color: #7f1d1d;
+      background: #ffedd5;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
     .timeline {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -881,7 +972,7 @@
 
     .time-card {
       padding: 14px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -908,7 +999,7 @@
       gap: 10px;
       align-items: center;
       padding: 12px;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
@@ -920,7 +1011,7 @@
       width: 42px;
       height: 42px;
       color: var(--teal);
-      background: #ccfbf1;
+      background: #ffe4e6;
       border-radius: var(--radius);
     }
 
@@ -971,14 +1062,14 @@
       padding: 12px 14px;
       color: var(--ink);
       text-align: left;
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
     }
 
     .answer.selected {
-      color: #075e55;
-      background: #ccfbf1;
+      color: #9f1239;
+      background: #ffe4e6;
       border-color: #5eead4;
     }
 
@@ -1006,8 +1097,8 @@
       align-items: center;
       min-height: 28px;
       padding: 5px 9px;
-      color: #075e55;
-      background: #ccfbf1;
+      color: #9f1239;
+      background: #ffe4e6;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
@@ -1018,7 +1109,7 @@
       min-height: 48px;
       padding: 12px 14px;
       color: var(--ink);
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       outline: none;
@@ -1033,7 +1124,7 @@
       min-height: 48px;
       padding: 12px;
       color: var(--muted);
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px dashed var(--line);
       border-radius: var(--radius);
       line-height: 1.6;
@@ -1044,7 +1135,7 @@
       padding: 12px;
       margin-top: 12px;
       color: var(--muted);
-      background: #f8fbfa;
+      background: #fffaf4;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       line-height: 1.65;
@@ -1129,7 +1220,7 @@
 
     .bottom-nav a.active {
       color: var(--teal);
-      background: #ecfdf5;
+      background: #fff1f2;
       font-weight: 800;
     }
 
@@ -1148,7 +1239,7 @@
       max-width: min(420px, calc(100% - 36px));
       padding: 12px 14px;
       color: white;
-      background: #123b36;
+      background: #4a160f;
       border-radius: var(--radius);
       box-shadow: 0 16px 36px rgba(0, 0, 0, .18);
       transform: translateY(18px);
@@ -1182,6 +1273,9 @@
 
       .grid.three,
       .grid.four,
+      .needle-plan-grid,
+      .needle-rule-grid,
+      .needle-param-grid,
       .timeline,
       .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1358,6 +1452,9 @@
       .terms,
       .timeline,
       .stats,
+      .needle-plan-grid,
+      .needle-rule-grid,
+      .needle-param-grid,
       .mini-diagram {
         grid-template-columns: 1fr;
       }
@@ -1374,7 +1471,7 @@
         width: 8px;
         height: 8px;
         margin-bottom: 8px;
-        box-shadow: 0 0 0 4px #ccfbf1;
+        box-shadow: 0 0 0 4px #ffe4e6;
       }
 
       .timeline-step p {
@@ -1424,6 +1521,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
           <input id="searchInput" type="search" placeholder="搜 Child-Pugh、胆管、布针、血栓...">
         </label>
+        <button class="ghost-btn lang-toggle" id="langToggle" type="button" aria-pressed="true" title="切换英文显示">中英</button>
         <button class="install-btn" id="installButton" type="button" title="安装到手机桌面">
           <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
           <span>安装</span>
@@ -1452,22 +1550,22 @@
       <main>
         <section class="hero learning-section module-shell" id="home" data-module="home" data-title="首页 IRE 肝癌 共识 指南 电脉冲 高危部位">
           <div>
-            <p class="eyebrow" style="color: rgba(255,255,255,.82)">肝癌 IRE 消融专家共识与临床实践指南</p>
+            <p class="eyebrow" style="color: rgba(255,255,255,.82)">肝癌 IRE 消融专家共识与临床实践指南<span class="en-line">Expert consensus and clinical practice guideline for liver cancer IRE ablation</span></p>
             <h1>肝癌 IRE 治疗注意事项</h1>
-            <p>IRE 可以理解为：用高压电脉冲精准处理肝内病灶，尽量保护邻近血管、胆管、肠道、膈肌和肝门等重要结构。</p>
+            <p>IRE 可以理解为：用高压电脉冲精准处理肝内病灶，尽量保护邻近血管、胆管、肠道、膈肌和肝门等重要结构。<span class="en-line">IRE uses high-voltage electrical pulses to ablate liver tumors while preserving adjacent vessels, bile ducts, bowel, diaphragm, and hepatic hilum structures.</span></p>
             <div class="hero-actions">
               <a href="#quick">进入知识库</a>
               <a class="secondary" href="#tools">查看 SOP</a>
             </div>
             <div class="module-grid" aria-label="主要功能入口">
-              <a class="module-link" href="#quick"><strong>知识库</strong><span>指南核心内容、适应证、禁忌证、并发症、随访疗效。</span></a>
-              <a class="module-link" href="#meds"><strong>用药模块</strong><span>麻醉肌松、抗感染、抗凝、镇痛和肝功能支持。</span></a>
-              <a class="module-link" href="#tools"><strong>SOP 操作流程</strong><span>按术前、术中、术后拆成标准作业步骤。</span></a>
-              <a class="module-link" href="#quiz"><strong>考试题库</strong><span>单选、多选、判断、排序、填空和病例题，适合培训考核。</span></a>
+              <a class="module-link" href="#quick"><strong>知识库</strong><span>指南核心内容、适应证、禁忌证、并发症、随访疗效。<span class="en-line">Core recommendations, indications, contraindications, complications, and follow-up.</span></span></a>
+              <a class="module-link" href="#meds"><strong>用药模块</strong><span>麻醉肌松、抗感染、抗凝、镇痛和肝功能支持。<span class="en-line">Anesthesia, muscle relaxation, antibiotics, anticoagulation, analgesia, and liver support.</span></span></a>
+              <a class="module-link" href="#tools"><strong>SOP 操作流程</strong><span>按术前、术中、术后拆成标准作业步骤。<span class="en-line">Stepwise SOP for pre-, intra-, and post-procedural care.</span></span></a>
+              <a class="module-link" href="#quiz"><strong>考试题库</strong><span>单选、多选、判断、排序、填空和病例题，适合培训考核。<span class="en-line">Single-choice, multiple-choice, true/false, ordering, fill-in, and case questions.</span></span></a>
             </div>
             <div class="notice">
               <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg></span>
-              <div>本应用用于医学学习与共识理解，不替代临床诊疗决策。实际治疗需结合患者病情、医院条件和临床规范。</div>
+              <div>本应用用于医学学习与共识理解，不替代临床诊疗决策。实际治疗需结合患者病情、医院条件和临床规范。<span class="en-line">For medical education only; it does not replace clinical decision-making or institutional protocols.</span></div>
             </div>
           </div>
           <div class="hero-visual" aria-label="肝癌 IRE 消融示意图">
@@ -1482,9 +1580,9 @@
                 <path d="M103 78c10 25 28 40 56 48 20 6 35 16 46 31" stroke="#8bd7ce" stroke-width="8" fill="none" stroke-linecap="round"></path>
                 <path d="M81 150c25-9 48-7 69 8" stroke="#8bd7ce" stroke-width="7" fill="none" stroke-linecap="round"></path>
                 <circle cx="137" cy="132" r="31" fill="#fb923c" opacity=".92"></circle>
-                <circle cx="137" cy="132" r="49" fill="none" stroke="#0f766e" stroke-width="5" stroke-dasharray="8 8"></circle>
-                <path d="M111 48v169M139 55v158M166 67v129" stroke="#14b8a6" stroke-width="6" stroke-linecap="round"></path>
-                <path d="M64 99c20 4 37 12 51 25" stroke="#2563eb" stroke-width="8" stroke-linecap="round" fill="none"></path>
+                <circle cx="137" cy="132" r="49" fill="none" stroke="#9f1239" stroke-width="5" stroke-dasharray="8 8"></circle>
+                <path d="M111 48v169M139 55v158M166 67v129" stroke="#f97316" stroke-width="6" stroke-linecap="round"></path>
+                <path d="M64 99c20 4 37 12 51 25" stroke="#4f46e5" stroke-width="8" stroke-linecap="round" fill="none"></path>
               </svg>
             </div>
           </div>
@@ -1497,7 +1595,7 @@
             <div>
               <p class="eyebrow">知识库</p>
               <h2>把专家共识整理成可查、可学、可复习的知识库</h2>
-              <p class="section-copy">主要包含指南核心内容、适应证、禁忌证、并发症、手术方式、随访与疗效评价。收藏按钮会记录你的重点。</p>
+              <p class="section-copy">主要包含指南核心内容、适应证、禁忌证、并发症、手术方式、随访与疗效评价。收藏按钮会记录你的重点。<span class="en-line">A searchable knowledge base covering recommendations, indications, contraindications, complications, workflow, and follow-up.</span></p>
             </div>
             <button class="ghost-btn" id="resetProgress" type="button">重置进度</button>
           </div>
@@ -1549,7 +1647,7 @@
             <div>
               <p class="eyebrow">知识补充</p>
               <h2>临床路径速记</h2>
-              <p class="section-copy">这部分作为知识库补充，帮助把入排、手术和随访串起来。</p>
+              <p class="section-copy">这部分作为知识库补充，帮助把入排、手术和随访串起来。<span class="en-line">A concise pathway linking patient selection, procedure, and follow-up.</span></p>
             </div>
           </div>
           <div class="storyline" id="storyline"></div>
@@ -1560,7 +1658,7 @@
             <div>
               <p class="eyebrow">SOP 操作流程</p>
               <h2>按标准作业步骤理解 IRE 治疗</h2>
-              <p class="section-copy">主入口是 SOP 指导；其他标签作为术前、布针、随访和并发症的补充速查。</p>
+              <p class="section-copy">主入口是 SOP 指导；其他标签作为术前、布针、随访和并发症的补充速查。<span class="en-line">Use the SOP tab as the main workflow; the other tabs provide quick references for preparation, electrode placement, follow-up, and complications.</span></p>
             </div>
           </div>
           <div class="tool-panel">
@@ -1690,7 +1788,19 @@
                   <span class="tag">布针口诀</span>
                   <h3>针要平行，也要覆盖安全边界</h3>
                   <p>根治性治疗中消融区应完全覆盖病灶及周围 0.5 cm 以上。两针裸露段之间形成有效消融区域，针要尽量两两平行、深度一致；靠近血管、胆囊、肠管时避免针尖垂直接触重要结构。</p>
+                  <p class="en-line">For curative ablation, the ablation zone should cover the tumor plus at least a 0.5 cm safety margin. The effective ablation zone forms between paired parallel electrodes.</p>
                 </div>
+              </div>
+              <div class="needle-guide searchable" data-text="肝脏 布针 共识 指南 2针 3针 2-6针 针距 电极针 肝门 胆管 血管 CT 超声">
+                <div class="section-head" style="margin:0">
+                  <div>
+                    <p class="eyebrow">肝脏布针全表</p>
+                    <h2>把指南和共识里的肝脏布针都放在这里</h2>
+                    <p class="section-copy">覆盖病灶大小对应电极针数、超声 2/3 针方案、CT/超声引导要点、针距与参数、特殊结构旁注意事项。</p>
+                    <p class="en-line">Complete liver electrode placement summary from the consensus and guideline: needle number by tumor size, ultrasound 2-/3-needle strategies, CT/US guidance, spacing, parameters, and high-risk anatomy precautions.</p>
+                  </div>
+                </div>
+                <div id="needlePlans"></div>
               </div>
             </div>
 
@@ -1738,7 +1848,7 @@
                   <p>胆道损伤、胆汁漏、肠管侵犯或胆肠吻合史会增加感染和肝脓肿风险；术前路径规划和抗感染策略很关键。</p>
                 </article>
               </div>
-              <div class="notice" style="margin-top:14px;background:#f8fbfa;border:1px solid var(--line)">
+              <div class="notice" style="margin-top:14px;background:#fffaf4;border:1px solid var(--line)">
                 <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span>
                 <div>记忆重点：指南报道高危部位肝癌 IRE 技术成功率约 83%-100%，并发症多为轻微症状，但心律失常、血栓、出血、感染、气胸/血胸和肝功能异常都要有预案。</div>
               </div>
@@ -1751,7 +1861,7 @@
             <div>
               <p class="eyebrow">知识补充</p>
               <h2>术语速查</h2>
-              <p class="section-copy">不是降低严谨性，而是先把意思讲明白。</p>
+              <p class="section-copy">不是降低严谨性，而是先把意思讲明白。<span class="en-line">Plain-language definitions without reducing clinical rigor.</span></p>
             </div>
           </div>
           <div class="terms" id="termsList"></div>
@@ -1762,7 +1872,7 @@
             <div>
               <p class="eyebrow">用药模块</p>
               <h2>围手术期用药速查</h2>
-              <p class="section-copy">根据肝脏恶性肿瘤 IRE 专家共识和超声引导肝癌 IRE 指南整理，重点覆盖麻醉、肌松、抗感染、抗凝、镇痛和支持治疗。</p>
+              <p class="section-copy">根据肝脏恶性肿瘤 IRE 专家共识和超声引导肝癌 IRE 指南整理，重点覆盖麻醉、肌松、抗感染、抗凝、镇痛和支持治疗。<span class="en-line">Medication reference for anesthesia, muscle relaxation, infection prevention, anticoagulation, analgesia, and supportive liver care.</span></p>
             </div>
           </div>
           <div class="med-note searchable" data-text="用药 安全提示 医嘱 抗生素 低分子肝素 麻醉 肌松">
@@ -1871,7 +1981,7 @@
             <div>
               <p class="eyebrow">考试题库</p>
               <h2>用于培训、复习和自测的题库</h2>
-              <p class="section-copy">包含单选、多选、判断、排序、填空和病例题。答错会显示解析，方便回到知识库复习。</p>
+              <p class="section-copy">包含单选、多选、判断、排序、填空和病例题。答错会显示解析，方便回到知识库复习。<span class="en-line">Training questions with explanations for review and self-assessment.</span></p>
             </div>
           </div>
           <div class="care-timeline compact searchable" data-text="考试题库 时间线 学习路径 基础题 进阶题 病例题 错题复习">
@@ -1939,61 +2049,88 @@
       checked: new Set(JSON.parse(localStorage.getItem("ireChecked") || "[]")),
       quizAnswers: JSON.parse(localStorage.getItem("ireQuizAnswers") || "{}"),
       quizIndex: Number(localStorage.getItem("ireQuizIndex") || 0),
-      seenSections: new Set(JSON.parse(localStorage.getItem("ireSeenSections") || "[]"))
+      seenSections: new Set(JSON.parse(localStorage.getItem("ireSeenSections") || "[]")),
+      hideEnglish: localStorage.getItem("ireHideEnglish") === "true"
     };
 
     const recommendations = [
-      { id: "rec1", tag: "强推荐", tone: "strong", title: "高危部位肝癌，IRE 有独特优势", body: "邻近血管、胆管、肠道、膈肌和肝门等部位时，非热消融能减少热沉效应和重要管道损伤。" },
-      { id: "rec2", tag: "强推荐", tone: "strong", title: "术前要全面评估患者和肿瘤", body: "术前评估应覆盖全身情况、重要脏器功能、肝功能、肿瘤大小数目、毗邻结构和治疗目标。" },
-      { id: "rec3", tag: "强推荐", tone: "strong", title: "心脏风险必须先排查", body: "术前应行心电图、超声心动图、心肌酶谱等检查，排除严重心律失常、起搏器和近期大面积心梗等风险。" },
-      { id: "rec4", tag: "一般推荐", tone: "", title: "胆道梗阻先处理", body: "术前胆道梗阻患者建议行胆道支架或经皮胆系引流，临近消融区时注意非金属支架选择。" },
-      { id: "rec5", tag: "强推荐", tone: "strong", title: "根治性消融要覆盖 0.5 cm 安全边界", body: "布针方案需明确电极数量、进针方向和深度，消融区应覆盖病灶及周围 0.5 cm 以上。" },
-      { id: "rec6", tag: "一般推荐", tone: "", title: "高危部位可用辅助技术", body: "人工液腹/胸、融合成像导航等技术可帮助显示病灶、避开重要结构并降低穿刺风险。" },
-      { id: "rec7", tag: "强推荐", tone: "strong", title: "术中密切监测并及时调整", body: "IRE 需要全麻、深肌松、心电同步和严密血流动力学监测；异常时要及时调整参数或暂停。" },
-      { id: "rec8", tag: "一般推荐", tone: "", title: "围消融期可预防感染和血栓", body: "根据患者及病灶情况，可预防性使用抗生素和低分子肝素，尤其关注胆道感染和邻近大血管病灶。" },
-      { id: "rec9", tag: "强推荐", tone: "strong", title: "术后及时预防和处理并发症", body: "重点关注心律失常、血栓、出血、感染、气胸/血胸和肝功能异常。" },
-      { id: "rec10", tag: "强推荐", tone: "strong", title: "术后规律随访", body: "随访包括 AFP、异常凝血酶原等肿瘤标志物，以及超声、增强 CT/MRI，以发现残留、复发或新发病灶。" }
+      { id: "rec1", tag: "强推荐", enTag: "Strong", tone: "strong", title: "高危部位肝癌，IRE 有独特优势", enTitle: "IRE is advantageous for high-risk liver tumors", body: "邻近血管、胆管、肠道、膈肌和肝门等部位时，非热消融能减少热沉效应和重要管道损伤。", enBody: "For tumors near vessels, bile ducts, bowel, diaphragm, or the hepatic hilum, non-thermal ablation reduces heat-sink limitations and ductal injury." },
+      { id: "rec2", tag: "强推荐", enTag: "Strong", tone: "strong", title: "术前要全面评估患者和肿瘤", enTitle: "Comprehensive pre-procedural assessment", body: "术前评估应覆盖全身情况、重要脏器功能、肝功能、肿瘤大小数目、毗邻结构和治疗目标。", enBody: "Assess performance status, organ function, liver reserve, tumor size/number, adjacent anatomy, and treatment intent." },
+      { id: "rec3", tag: "强推荐", enTag: "Strong", tone: "strong", title: "心脏风险必须先排查", enTitle: "Cardiac risk must be excluded", body: "术前应行心电图、超声心动图、心肌酶谱等检查，排除严重心律失常、起搏器和近期大面积心梗等风险。", enBody: "Use ECG, echocardiography, and myocardial enzymes to exclude severe arrhythmia, pacemaker history, and recent major myocardial infarction." },
+      { id: "rec4", tag: "一般推荐", enTag: "Conditional", tone: "", title: "胆道梗阻先处理", enTitle: "Treat biliary obstruction first", body: "术前胆道梗阻患者建议行胆道支架或经皮胆系引流，临近消融区时注意非金属支架选择。", enBody: "Biliary obstruction should be relieved with stenting or percutaneous drainage; non-metallic stents are preferred near the ablation zone." },
+      { id: "rec5", tag: "强推荐", enTag: "Strong", tone: "strong", title: "根治性消融要覆盖 0.5 cm 安全边界", enTitle: "Curative ablation requires a 0.5 cm margin", body: "布针方案需明确电极数量、进针方向和深度，消融区应覆盖病灶及周围 0.5 cm 以上。", enBody: "The plan should define electrode number, direction, and depth, covering the tumor plus at least 0.5 cm." },
+      { id: "rec6", tag: "一般推荐", enTag: "Conditional", tone: "", title: "高危部位可用辅助技术", enTitle: "Adjuncts help in high-risk anatomy", body: "人工液腹/胸、融合成像导航等技术可帮助显示病灶、避开重要结构并降低穿刺风险。", enBody: "Artificial ascites/pleural effusion and fusion navigation can improve visualization and reduce puncture risk." },
+      { id: "rec7", tag: "强推荐", enTag: "Strong", tone: "strong", title: "术中密切监测并及时调整", enTitle: "Monitor closely and adjust intraoperatively", body: "IRE 需要全麻、深肌松、心电同步和严密血流动力学监测；异常时要及时调整参数或暂停。", enBody: "IRE requires general anesthesia, deep neuromuscular blockade, ECG synchronization, and close hemodynamic monitoring." },
+      { id: "rec8", tag: "一般推荐", enTag: "Conditional", tone: "", title: "围消融期可预防感染和血栓", enTitle: "Prevent infection and thrombosis when indicated", body: "根据患者及病灶情况，可预防性使用抗生素和低分子肝素，尤其关注胆道感染和邻近大血管病灶。", enBody: "Antibiotics and low-molecular-weight heparin may be used according to infection and thrombosis risk." },
+      { id: "rec9", tag: "强推荐", enTag: "Strong", tone: "strong", title: "术后及时预防和处理并发症", enTitle: "Prevent and treat complications promptly", body: "重点关注心律失常、血栓、出血、感染、气胸/血胸和肝功能异常。", enBody: "Watch for arrhythmia, thrombosis, bleeding, infection, pneumothorax/hemothorax, and liver dysfunction." },
+      { id: "rec10", tag: "强推荐", enTag: "Strong", tone: "strong", title: "术后规律随访", enTitle: "Regular follow-up is required", body: "随访包括 AFP、异常凝血酶原等肿瘤标志物，以及超声、增强 CT/MRI，以发现残留、复发或新发病灶。", enBody: "Follow-up includes AFP, DCP/PIVKA-II, ultrasound, and contrast-enhanced CT/MRI." }
     ];
 
     const storySteps = [
-      { title: "确认肝脏恶性肿瘤和治疗目标", body: "先看是根治性消融、姑息性消融，还是联合靶向、化疗或免疫治疗的一部分。" },
-      { title: "判断是不是 IRE 的优势场景", body: "病灶靠近肝门、血管、胆管、肠道、膈肌等高危部位时，IRE 的非热消融优势更突出。" },
-      { title: "术前检查把地图画清楚", body: "增强 CT/MRI、超声造影、肝功能、凝血、心脏评估和肿瘤标志物共同决定能不能做、怎么做。" },
-      { title: "全麻深肌松下精准布针", body: "电极针两两平行、深度一致，让两针之间的消融区域覆盖病灶和安全边界。" },
-      { title: "测试脉冲先看电流", body: "正式消融前先释放 10-20 个测试脉冲，观察电流走势，再根据实时情况调整参数。" },
-      { title: "术后先排并发症", body: "复苏后监护生命体征，复查肝肾功能、血常规和影像，按风险处理感染、血栓、出血和疼痛。" },
-      { title: "随访看标志物和强化信号", body: "术后 1 个月评估疗效；完全消融后每 3 个月复查肿瘤标志物、超声和增强 CT/MRI。" }
+      { title: "确认肝脏恶性肿瘤和治疗目标", enTitle: "Confirm malignancy and intent", body: "先看是根治性消融、姑息性消融，还是联合靶向、化疗或免疫治疗的一部分。", enBody: "Clarify curative ablation, palliative ablation, or combination with systemic therapy." },
+      { title: "判断是不是 IRE 的优势场景", enTitle: "Check whether IRE adds value", body: "病灶靠近肝门、血管、胆管、肠道、膈肌等高危部位时，IRE 的非热消融优势更突出。", enBody: "IRE is most valuable near the hilum, vessels, bile ducts, bowel, or diaphragm." },
+      { title: "术前检查把地图画清楚", enTitle: "Build the pre-procedural map", body: "增强 CT/MRI、超声造影、肝功能、凝血、心脏评估和肿瘤标志物共同决定能不能做、怎么做。", enBody: "CT/MRI, CEUS, liver reserve, coagulation, cardiac workup, and tumor markers guide feasibility and planning." },
+      { title: "全麻深肌松下精准布针", enTitle: "Place electrodes under GA and deep relaxation", body: "电极针两两平行、深度一致，让两针之间的消融区域覆盖病灶和安全边界。", enBody: "Keep paired electrodes parallel and at matched depth so the inter-electrode field covers the tumor and margin." },
+      { title: "测试脉冲先看电流", enTitle: "Test pulses before full ablation", body: "正式消融前先释放 10-20 个测试脉冲，观察电流走势，再根据实时情况调整参数。", enBody: "Deliver 10-20 test pulses, review current trends, and adjust parameters before formal ablation." },
+      { title: "术后先排并发症", enTitle: "Screen for early complications", body: "复苏后监护生命体征，复查肝肾功能、血常规和影像，按风险处理感染、血栓、出血和疼痛。", enBody: "Monitor vitals and labs/imaging, then manage infection, thrombosis, bleeding, and pain risk." },
+      { title: "随访看标志物和强化信号", enTitle: "Follow markers and enhancement", body: "术后 1 个月评估疗效；完全消融后每 3 个月复查肿瘤标志物、超声和增强 CT/MRI。", enBody: "Assess response at 1 month; after complete ablation, repeat markers, ultrasound, and enhanced CT/MRI every 3 months." }
     ];
 
     const prepItems = [
-      { id: "prep1", title: "影像学评估", body: "腹部增强 CT/MRI、超声及超声造影，明确病灶数目、大小、形态、边缘、血供和毗邻结构。" },
-      { id: "prep2", title: "全身与麻醉耐受", body: "KPS、ECOG、麻醉风险评估，以及心、肺、脑、肝、肾等重要脏器功能。" },
-      { id: "prep3", title: "实验室检查", body: "血生化、凝血功能、血尿便常规、心肌酶谱、肿瘤标志物和病毒性肝炎相关检查。" },
-      { id: "prep4", title: "心脏专项排查", body: "心电图、超声心动图、心肌酶谱；排除严重心律失常、起搏器、近期大面积心梗等。" },
-      { id: "prep5", title: "胆道与抗凝管理", body: "胆道梗阻先支架或引流；术前 1 周停用抗凝和活血药物，短效抗凝药按规范停用。" },
-      { id: "prep6", title: "设备与药品", body: "超声/CT、IRE 治疗仪、心电同步仪、电极针、监护仪、麻醉机、除颤仪、急救车、麻醉和抢救药品。" }
+      { id: "prep1", title: "影像学评估", enTitle: "Imaging assessment", body: "腹部增强 CT/MRI、超声及超声造影，明确病灶数目、大小、形态、边缘、血供和毗邻结构。", enBody: "Use enhanced CT/MRI, ultrasound, and CEUS to define tumor number, size, shape, blood supply, and adjacent structures." },
+      { id: "prep2", title: "全身与麻醉耐受", enTitle: "General and anesthesia fitness", body: "KPS、ECOG、麻醉风险评估，以及心、肺、脑、肝、肾等重要脏器功能。", enBody: "Assess KPS, ECOG, anesthesia risk, and major organ function." },
+      { id: "prep3", title: "实验室检查", enTitle: "Laboratory tests", body: "血生化、凝血功能、血尿便常规、心肌酶谱、肿瘤标志物和病毒性肝炎相关检查。", enBody: "Check biochemistry, coagulation, routine blood/urine/stool tests, myocardial enzymes, tumor markers, and hepatitis status." },
+      { id: "prep4", title: "心脏专项排查", enTitle: "Cardiac workup", body: "心电图、超声心动图、心肌酶谱；排除严重心律失常、起搏器、近期大面积心梗等。", enBody: "Use ECG, echocardiography, and myocardial enzymes to exclude major cardiac risks." },
+      { id: "prep5", title: "胆道与抗凝管理", enTitle: "Biliary and anticoagulation management", body: "胆道梗阻先支架或引流；术前 1 周停用抗凝和活血药物，短效抗凝药按规范停用。", enBody: "Drain/stent biliary obstruction and stop anticoagulant or blood-activating medications according to protocol." },
+      { id: "prep6", title: "设备与药品", enTitle: "Equipment and medications", body: "超声/CT、IRE 治疗仪、心电同步仪、电极针、监护仪、麻醉机、除颤仪、急救车、麻醉和抢救药品。", enBody: "Prepare imaging, IRE generator, ECG synchronizer, electrodes, monitors, anesthesia machine, defibrillator, crash cart, and rescue drugs." }
     ];
 
     const followTimeline = [
-      { time: "术后 3-7 天", body: "复查超声造影和(或)增强 CT/MRI，结合肝肾功能、血尿便常规评估早期恢复和并发症。" },
-      { time: "术后 1 个月", body: "行增强 CT/MRI 或超声造影评价疗效：无动脉期强化提示完全消融，局部强化提示可能残留。" },
-      { time: "完全消融后每 3 个月", body: "复查 AFP、异常凝血酶原等肿瘤标志物、超声、增强 CT/MRI，及时发现复发或新发病灶。" },
-      { time: "有远处转移风险时", body: "可结合肺 CT、骨扫描、PET-CT 等检查明确远处病灶。" },
-      { time: "病情稳定后", body: "专家共识建议可每 6 个月随访 1 次，并根据基础肝病和综合治疗计划个体化调整。" }
+      { time: "术后 3-7 天", enTime: "Post-op days 3-7", body: "复查超声造影和(或)增强 CT/MRI，结合肝肾功能、血尿便常规评估早期恢复和并发症。", enBody: "Repeat CEUS and/or enhanced CT/MRI with labs to assess early recovery and complications." },
+      { time: "术后 1 个月", enTime: "1 month", body: "行增强 CT/MRI 或超声造影评价疗效：无动脉期强化提示完全消融，局部强化提示可能残留。", enBody: "Enhanced CT/MRI or CEUS assesses response; no arterial enhancement suggests complete ablation." },
+      { time: "完全消融后每 3 个月", enTime: "Every 3 months after complete ablation", body: "复查 AFP、异常凝血酶原等肿瘤标志物、超声、增强 CT/MRI，及时发现复发或新发病灶。", enBody: "Repeat AFP, DCP/PIVKA-II, ultrasound, and enhanced CT/MRI." },
+      { time: "有远处转移风险时", enTime: "If distant spread is suspected", body: "可结合肺 CT、骨扫描、PET-CT 等检查明确远处病灶。", enBody: "Use chest CT, bone scan, or PET-CT when distant metastasis risk exists." },
+      { time: "病情稳定后", enTime: "When stable", body: "专家共识建议可每 6 个月随访 1 次，并根据基础肝病和综合治疗计划个体化调整。", enBody: "The consensus allows 6-month follow-up intervals once stable, individualized to liver disease and treatment plan." }
     ];
 
     const terms = [
-      { title: "Child-Pugh", body: "肝功能分级。指南将 Child-Pugh A/B 作为适应证之一，Child-Pugh C 且无法改善属于禁忌证。" },
-      { title: "KPS", body: "Karnofsky 功能状态评分。共识和指南都强调预计生存期 3 个月以上，KPS > 50。" },
-      { title: "ECOG", body: "体力状态评分。指南把 ECOG > 2 作为一般情况差、需要排除的风险信号。" },
-      { title: "AFP", body: "甲胎蛋白，是肝癌随访常用血清学肿瘤标志物之一，需和影像一起判断。" },
-      { title: "异常凝血酶原", body: "又称 PIVKA-II 或 DCP，是肝癌随访中常用的另一类肿瘤标志物。" },
-      { title: "超声造影", body: "通过观察微循环灌注来定位病灶、术中评估消融范围和术后判断有无强化残留。" },
-      { title: "完全消融", body: "增强 CT/MRI 或超声造影随访显示病灶内无动脉期强化，提示肿瘤完全坏死。" },
-      { title: "不完全消融", body: "病灶内仍有局部强化，提示可能存在残留活性肿瘤，需要进一步处理。" },
-      { title: "热沉效应", body: "血流带走热量导致热消融不彻底的现象。IRE 不依赖温度，因此在血管旁有优势。" },
-      { title: "心电同步", body: "让电脉冲避开心动周期易诱发心律失常的时段，是 IRE 降低心律失常风险的重要设置。" }
+      { title: "Child-Pugh", enTitle: "Child-Pugh score", body: "肝功能分级。指南将 Child-Pugh A/B 作为适应证之一，Child-Pugh C 且无法改善属于禁忌证。", enBody: "A liver reserve score. Child-Pugh A/B is acceptable; uncorrectable Child-Pugh C is a contraindication." },
+      { title: "KPS", enTitle: "Karnofsky performance status", body: "Karnofsky 功能状态评分。共识和指南都强调预计生存期 3 个月以上，KPS > 50。", enBody: "A functional status score; the documents emphasize expected survival > 3 months and KPS > 50." },
+      { title: "ECOG", enTitle: "ECOG performance status", body: "体力状态评分。指南把 ECOG > 2 作为一般情况差、需要排除的风险信号。", enBody: "A performance score; ECOG > 2 signals poor general condition and exclusion risk." },
+      { title: "AFP", enTitle: "Alpha-fetoprotein", body: "甲胎蛋白，是肝癌随访常用血清学肿瘤标志物之一，需和影像一起判断。", enBody: "A serum tumor marker used in liver cancer follow-up, interpreted with imaging." },
+      { title: "异常凝血酶原", enTitle: "DCP / PIVKA-II", body: "又称 PIVKA-II 或 DCP，是肝癌随访中常用的另一类肿瘤标志物。", enBody: "Another liver cancer marker used during follow-up." },
+      { title: "超声造影", enTitle: "Contrast-enhanced ultrasound", body: "通过观察微循环灌注来定位病灶、术中评估消融范围和术后判断有无强化残留。", enBody: "Shows microvascular perfusion for lesion targeting, intraoperative assessment, and residual enhancement detection." },
+      { title: "完全消融", enTitle: "Complete ablation", body: "增强 CT/MRI 或超声造影随访显示病灶内无动脉期强化，提示肿瘤完全坏死。", enBody: "No arterial enhancement on enhanced CT/MRI or CEUS, suggesting complete tumor necrosis." },
+      { title: "不完全消融", enTitle: "Incomplete ablation", body: "病灶内仍有局部强化，提示可能存在残留活性肿瘤，需要进一步处理。", enBody: "Persistent local enhancement suggests residual viable tumor and needs further management." },
+      { title: "热沉效应", enTitle: "Heat-sink effect", body: "血流带走热量导致热消融不彻底的现象。IRE 不依赖温度，因此在血管旁有优势。", enBody: "Blood flow removes heat and weakens thermal ablation; IRE is non-thermal and less affected." },
+      { title: "心电同步", enTitle: "ECG synchronization", body: "让电脉冲避开心动周期易诱发心律失常的时段，是 IRE 降低心律失常风险的重要设置。", enBody: "Synchronizes pulses to safer cardiac timing to reduce arrhythmia risk." }
     ];
+
+    const needleData = {
+      sizePlans: [
+        { source: "2022 共识", title: "D <= 2 cm", enTitle: "D <= 2 cm", body: "建议 2-3 支电极针。病灶较小时可用 2 针平行置于病灶两侧，以无接触肿瘤方式整体消融。", enBody: "Use 2-3 electrodes. For small tumors, two parallel electrodes can be placed on both sides of the lesion without directly puncturing the tumor." },
+        { source: "2022 共识", title: "2 cm < D <= 3 cm", enTitle: "2 cm < D <= 3 cm", body: "建议 3-4 支；如病灶周围结构复杂、穿刺风险较高，可考虑 2 支电极针并分次/移动消融。", enBody: "Use 3-4 electrodes; if surrounding anatomy is complex or puncture risk is high, consider two electrodes with staged or repositioned ablation." },
+        { source: "2022 共识", title: "3 cm < D <= 4 cm", enTitle: "3 cm < D <= 4 cm", body: "建议 3-5 支电极针，沿病灶长轴和形态设计，必要时退针继续消融。", enBody: "Use 3-5 electrodes, planned along the long axis and tumor shape; pull-back ablation may be needed." },
+        { source: "2022 共识", title: "4 cm < D <= 5 cm", enTitle: "4 cm < D <= 5 cm", body: "建议 4-6 支电极针，需严格控制重叠消融范围，同一区域尽量不超过 3 次。", enBody: "Use 4-6 electrodes. Avoid excessive overlap and keep repeat ablations in the same region to no more than three whenever possible." }
+      ],
+      rules: [
+        { source: "2022 共识", title: "有效针距", enTitle: "Effective spacing", body: "电极针之间有效消融间距建议 1.5-2.2 cm，至少保证两两平行，使消融范围覆盖病灶并超过边缘约 0.5 cm。", enBody: "Recommended effective spacing is 1.5-2.2 cm. Keep paired electrodes parallel and cover the lesion plus about 0.5 cm margin." },
+        { source: "2023 指南", title: "超声引导 2-3 针为主", enTitle: "US guidance usually uses 2-3 needles", body: "超声视野和肋间隙限制下，多选择 2-3 根电极针；2 针适合最大径 <= 2 cm，3 针适合 > 2 cm 病灶组合覆盖。", enBody: "Under ultrasound guidance, 2-3 electrodes are commonly used. Two needles fit lesions <= 2 cm; three needles combine paired ablation zones for lesions > 2 cm." },
+        { source: "2023 指南", title: "2 针方案", enTitle: "Two-needle strategy", body: "2 针平行布于病灶两侧，也可通过移动两根针的位置扩大消融范围。", enBody: "Place two parallel electrodes on both sides of the lesion; moving both needles can enlarge the ablation zone." },
+        { source: "2023 指南", title: "3 针方案", enTitle: "Three-needle strategy", body: "3 针之间两两形成消融区域，组合覆盖较大病灶；也可移动第 3 根针调整消融范围。", enBody: "Three needles create paired ablation zones that combine to cover larger lesions; the third needle can be repositioned to reshape coverage." },
+        { source: "2022 共识", title: "不规则病灶", enTitle: "Irregular lesions", body: "尽量避开其他脏器及血管，沿病灶长轴布针；一次消融后可退针继续，但重叠消融不宜过大。", enBody: "Avoid adjacent organs and vessels, place electrodes along the long axis, and use pull-back ablation with limited overlap." },
+        { source: "2022 共识", title: "重要结构旁", enTitle: "Near critical structures", body: "靠近血管、胆囊、肠管时，避免针尖垂直接触重要结构；避免电极针紧贴血管壁，以减少机械或热损伤。", enBody: "Near vessels, gallbladder, or bowel, avoid perpendicular contact with critical structures and avoid placing electrodes tightly against vessel walls." },
+        { source: "2022 共识", title: "CT 引导", enTitle: "CT guidance", body: "CT 下可用三维重建明确病灶、脏器和消融针关系；穿刺采用“步进式”进针，避免穿过胸腔造成肺损伤。", enBody: "CT allows 3D planning; use stepwise advancement and avoid transpleural routes when possible." },
+        { source: "2022/2023", title: "超声与辅助技术", enTitle: "Ultrasound and adjuncts", body: "超声可实时监测角度和深度；显示不清或膈顶部病灶可用人工液腹/液胸、融合导航和超声造影辅助。", enBody: "Ultrasound offers real-time needle tracking; artificial ascites/pleural effusion, fusion navigation, and CEUS can assist difficult lesions." }
+      ],
+      parameters: [
+        { title: "裸露段", enTitle: "Exposure", body: "常用 1.5-2.0 cm；肝门部脉管丰富、结构不均匀时建议 1.5 cm。", enBody: "Usually 1.5-2.0 cm; use 1.5 cm near the hepatic hilum." },
+        { title: "电场强度", enTitle: "Field strength", body: "共识多选 1500-2800 V/cm；超声指南按 NanoKnife 示例为 1000-3000 V/cm。", enBody: "Consensus: often 1500-2800 V/cm; ultrasound guideline example: 1000-3000 V/cm." },
+        { title: "针间距", enTitle: "Needle spacing", body: "共识有效间距 1.5-2.2 cm；超声指南示例 1.2-2.4 cm。", enBody: "Consensus: 1.5-2.2 cm effective spacing; US guideline example: 1.2-2.4 cm." },
+        { title: "脉宽/脉冲数", enTitle: "Pulse width/count", body: "脉宽 70-90 μs；脉冲数约 70-100 个，超声指南示例 70-90 个。", enBody: "Pulse width 70-90 μs; pulse count about 70-100, with 70-90 in the US guideline example." },
+        { title: "测试电流", enTitle: "Test current", body: "先测 10-20 个脉冲；共识提示 25-45 A 且逐渐上升较合理，超声指南提示正式消融后 30-50 A。", enBody: "Test with 10-20 pulses; consensus suggests 25-45 A with an increasing trend, while the US guideline cites 30-50 A during formal ablation." }
+      ]
+    };
 
     const quiz = [
       {
@@ -2177,14 +2314,18 @@
       toast.timer = window.setTimeout(() => node.classList.remove("show"), 2400);
     }
 
+    function bi(english) {
+      return english ? `<span class="en-line">${english}</span>` : "";
+    }
+
     function renderRecommendations() {
       const wrap = document.getElementById("recommendations");
       wrap.innerHTML = recommendations.map(item => `
-        <article class="card searchable" data-text="${item.title} ${item.body} ${item.tag}">
+        <article class="card searchable" data-text="${item.title} ${item.body} ${item.tag} ${item.enTitle || ""} ${item.enBody || ""}">
           <button class="favorite ${appState.favorites.has(item.id) ? "active" : ""}" type="button" data-fav="${item.id}" aria-label="收藏 ${item.title}">${icons.star}</button>
-          <span class="tag ${item.tone}">${item.tag}</span>
-          <h3>${item.title}</h3>
-          <p>${item.body}</p>
+          <span class="tag ${item.tone}">${item.tag}${item.enTag ? ` / ${item.enTag}` : ""}</span>
+          <h3>${item.title}${bi(item.enTitle)}</h3>
+          <p>${item.body}${bi(item.enBody)}</p>
         </article>
       `).join("");
     }
@@ -2192,10 +2333,10 @@
     function renderStory() {
       const wrap = document.getElementById("storyline");
       wrap.innerHTML = storySteps.map(step => `
-        <article class="story-step searchable" data-text="${step.title} ${step.body}">
+        <article class="story-step searchable" data-text="${step.title} ${step.body} ${step.enTitle || ""} ${step.enBody || ""}">
           <div>
-            <h3>${step.title}</h3>
-            <p>${step.body}</p>
+            <h3>${step.title}${bi(step.enTitle)}</h3>
+            <p>${step.body}${bi(step.enBody)}</p>
           </div>
         </article>
       `).join("");
@@ -2204,9 +2345,9 @@
     function renderPrep() {
       const wrap = document.getElementById("prepChecklist");
       wrap.innerHTML = prepItems.map(item => `
-        <label class="check-item searchable" data-text="${item.title} ${item.body}">
+        <label class="check-item searchable" data-text="${item.title} ${item.body} ${item.enTitle || ""} ${item.enBody || ""}">
           <input type="checkbox" data-check="${item.id}" ${appState.checked.has(item.id) ? "checked" : ""}>
-          <span><strong>${item.title}</strong><br>${item.body}</span>
+          <span><strong>${item.title}${bi(item.enTitle)}</strong><br>${item.body}${bi(item.enBody)}</span>
         </label>
       `).join("");
     }
@@ -2214,9 +2355,9 @@
     function renderTimeline() {
       const wrap = document.getElementById("followTimeline");
       wrap.innerHTML = followTimeline.map(item => `
-        <article class="time-card searchable" data-text="${item.time} ${item.body}">
-          <strong>${item.time}</strong>
-          <span>${item.body}</span>
+        <article class="time-card searchable" data-text="${item.time} ${item.body} ${item.enTime || ""} ${item.enBody || ""}">
+          <strong>${item.time}${bi(item.enTime)}</strong>
+          <span>${item.body}${bi(item.enBody)}</span>
         </article>
       `).join("");
     }
@@ -2224,11 +2365,45 @@
     function renderTerms() {
       const wrap = document.getElementById("termsList");
       wrap.innerHTML = terms.map(item => `
-        <details class="term searchable" data-text="${item.title} ${item.body}">
-          <summary>${item.title}</summary>
-          <p>${item.body}</p>
+        <details class="term searchable" data-text="${item.title} ${item.body} ${item.enTitle || ""} ${item.enBody || ""}">
+          <summary>${item.title}${bi(item.enTitle)}</summary>
+          <p>${item.body}${bi(item.enBody)}</p>
         </details>
       `).join("");
+    }
+
+    function renderNeedlePlans() {
+      const wrap = document.getElementById("needlePlans");
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <div class="needle-plan-grid">
+          ${needleData.sizePlans.map(item => `
+            <article class="needle-plan-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
+              <span class="source-pill">${item.source}</span>
+              <strong>${item.title}${bi(item.enTitle)}</strong>
+              <span>${item.body}${bi(item.enBody)}</span>
+            </article>
+          `).join("")}
+        </div>
+        <div class="needle-rule-grid">
+          ${needleData.rules.map(item => `
+            <article class="needle-rule-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
+              <span class="source-pill">${item.source}</span>
+              <strong>${item.title}${bi(item.enTitle)}</strong>
+              <span>${item.body}${bi(item.enBody)}</span>
+            </article>
+          `).join("")}
+        </div>
+        <div class="needle-param-grid">
+          ${needleData.parameters.map(item => `
+            <article class="needle-param-card searchable" data-text="${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
+              <span class="source-pill">参数 / Parameters</span>
+              <strong>${item.title}${bi(item.enTitle)}</strong>
+              <span>${item.body}${bi(item.enBody)}</span>
+            </article>
+          `).join("")}
+        </div>
+      `;
     }
 
     function getQuizEntry(index = appState.quizIndex) {
@@ -2600,6 +2775,23 @@
       });
     }
 
+    function setupLanguageToggle() {
+      const button = document.getElementById("langToggle");
+      if (!button) return;
+      const apply = () => {
+        document.body.classList.toggle("hide-en", appState.hideEnglish);
+        button.textContent = appState.hideEnglish ? "中文" : "中英";
+        button.setAttribute("aria-pressed", String(!appState.hideEnglish));
+        button.title = appState.hideEnglish ? "显示英文" : "隐藏英文";
+        localStorage.setItem("ireHideEnglish", String(appState.hideEnglish));
+      };
+      button.addEventListener("click", () => {
+        appState.hideEnglish = !appState.hideEnglish;
+        apply();
+      });
+      apply();
+    }
+
     function setupServiceWorker() {
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
@@ -2614,6 +2806,7 @@
       renderRecommendations();
       renderStory();
       renderPrep();
+      renderNeedlePlans();
       renderTimeline();
       renderTerms();
       renderQuiz();
@@ -2623,6 +2816,7 @@
       setupSearch();
       setupModuleNavigation();
       setupObservers();
+      setupLanguageToggle();
       setupInstall();
       setupServiceWorker();
     }
