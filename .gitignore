@@ -1,7 +1,7 @@
 *.pdf
+!docs/references/*.pdf
 *.docx
 *.tmp
 *.log
 *.png.tmp
 pwa-*-check.png
-

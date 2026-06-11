@@ -1,7 +1,7 @@
 {
-  "name": "IRE 共识轻松学",
-  "short_name": "IRE轻松学",
-  "description": "前列腺癌不可逆电穿孔消融局灶治疗专家共识的图解故事化学习应用。",
+  "name": "肝癌 IRE 轻松学",
+  "short_name": "肝癌IRE",
+  "description": "肝癌不可逆电穿孔消融治疗专家共识与临床实践指南的图解故事化学习应用。",
   "id": "./",
   "start_url": "./index.html",
   "scope": "./",
