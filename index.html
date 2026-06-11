@@ -566,12 +566,12 @@
       line-height: 1.55;
     }
 
-    body.hide-en .en-line {
+    body.lang-zh .en-line {
       display: none;
     }
 
     .lang-toggle {
-      min-width: 72px;
+      min-width: 92px;
       color: var(--teal);
       background: #fff7ed;
       border-color: #fed7aa;
@@ -2329,7 +2329,7 @@
       quizAnswers: JSON.parse(localStorage.getItem("ireQuizAnswers") || "{}"),
       quizIndex: Number(localStorage.getItem("ireQuizIndex") || 0),
       seenSections: new Set(JSON.parse(localStorage.getItem("ireSeenSections") || "[]")),
-      hideEnglish: localStorage.getItem("ireHideEnglish") === "true"
+      language: localStorage.getItem("ireLanguage") || "zh"
     };
 
     const recommendations = [
@@ -2593,18 +2593,35 @@
       toast.timer = window.setTimeout(() => node.classList.remove("show"), 2400);
     }
 
+    function isEnglish() {
+      return appState.language === "en";
+    }
+
+    function tx(zh, en) {
+      return isEnglish() && en ? en : zh;
+    }
+
+    function sourceName(source, english) {
+      const names = {
+        "2022 共识": "2022 consensus",
+        "2023 指南": "2023 guideline",
+        "2022/2023": "2022 consensus / 2023 guideline"
+      };
+      return tx(source, english || names[source]);
+    }
+
     function bi(english) {
-      return english ? `<span class="en-line">${english}</span>` : "";
+      return isEnglish() || !english ? "" : `<span class="en-line">${english}</span>`;
     }
 
     function renderRecommendations() {
       const wrap = document.getElementById("recommendations");
       wrap.innerHTML = recommendations.map(item => `
         <article class="card searchable" data-text="${item.title} ${item.body} ${item.tag} ${item.enTitle || ""} ${item.enBody || ""}">
-          <button class="favorite ${appState.favorites.has(item.id) ? "active" : ""}" type="button" data-fav="${item.id}" aria-label="收藏 ${item.title}">${icons.star}</button>
-          <span class="tag ${item.tone}">${item.tag}${item.enTag ? ` / ${item.enTag}` : ""}</span>
-          <h3>${item.title}${bi(item.enTitle)}</h3>
-          <p>${item.body}${bi(item.enBody)}</p>
+          <button class="favorite ${appState.favorites.has(item.id) ? "active" : ""}" type="button" data-fav="${item.id}" aria-label="${tx("收藏", "Save")} ${tx(item.title, item.enTitle)}">${icons.star}</button>
+          <span class="tag ${item.tone}">${tx(item.tag, item.enTag)}</span>
+          <h3>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</h3>
+          <p>${tx(item.body, item.enBody)}${bi(item.enBody)}</p>
         </article>
       `).join("");
     }
@@ -2614,8 +2631,8 @@
       wrap.innerHTML = storySteps.map(step => `
         <article class="story-step searchable" data-text="${step.title} ${step.body} ${step.enTitle || ""} ${step.enBody || ""}">
           <div>
-            <h3>${step.title}${bi(step.enTitle)}</h3>
-            <p>${step.body}${bi(step.enBody)}</p>
+            <h3>${tx(step.title, step.enTitle)}${bi(step.enTitle)}</h3>
+            <p>${tx(step.body, step.enBody)}${bi(step.enBody)}</p>
           </div>
         </article>
       `).join("");
@@ -2626,7 +2643,7 @@
       wrap.innerHTML = prepItems.map(item => `
         <label class="check-item searchable" data-text="${item.title} ${item.body} ${item.enTitle || ""} ${item.enBody || ""}">
           <input type="checkbox" data-check="${item.id}" ${appState.checked.has(item.id) ? "checked" : ""}>
-          <span><strong>${item.title}${bi(item.enTitle)}</strong><br>${item.body}${bi(item.enBody)}</span>
+          <span><strong>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</strong><br>${tx(item.body, item.enBody)}${bi(item.enBody)}</span>
         </label>
       `).join("");
     }
@@ -2635,8 +2652,8 @@
       const wrap = document.getElementById("followTimeline");
       wrap.innerHTML = followTimeline.map(item => `
         <article class="time-card searchable" data-text="${item.time} ${item.body} ${item.enTime || ""} ${item.enBody || ""}">
-          <strong>${item.time}${bi(item.enTime)}</strong>
-          <span>${item.body}${bi(item.enBody)}</span>
+          <strong>${tx(item.time, item.enTime)}${bi(item.enTime)}</strong>
+          <span>${tx(item.body, item.enBody)}${bi(item.enBody)}</span>
         </article>
       `).join("");
     }
@@ -2645,60 +2662,67 @@
       const wrap = document.getElementById("termsList");
       wrap.innerHTML = terms.map(item => `
         <details class="term searchable" data-text="${item.title} ${item.body} ${item.enTitle || ""} ${item.enBody || ""}">
-          <summary>${item.title}${bi(item.enTitle)}</summary>
-          <p>${item.body}${bi(item.enBody)}</p>
+          <summary>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</summary>
+          <p>${tx(item.body, item.enBody)}${bi(item.enBody)}</p>
         </details>
       `).join("");
     }
 
     function needleSvg(type = "two") {
-      const patterns = {
-        two: { pins: [[72, 94], [128, 94]], zones: [[100, 94, 48, 38]], label: "2-needle top view" },
-        three: { pins: [[70, 72], [130, 72], [100, 132]], zones: [[100, 96, 58, 58]], label: "3-needle top view", links: [[70,72,130,72],[130,72,100,132],[100,132,70,72]] },
-        five: { pins: [[68, 58], [132, 58], [56, 116], [144, 116], [100, 148]], zones: [[100, 102, 76, 74]], label: "3-5 needles top view" },
-        six: { pins: [[62, 54], [100, 42], [138, 54], [58, 126], [100, 154], [142, 126]], zones: [[100, 100, 84, 88]], label: "4-6 needles top view" },
-        spacing: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 46, 40]], label: "1.5-2.2 cm spacing", measure: true },
-        longAxis: { pins: [[64, 82], [100, 96], [136, 110]], zones: [[100, 96, 74, 40]], label: "long-axis top view", long: true },
-        critical: { pins: [[70, 78], [128, 112]], zones: [[100, 96, 52, 46]], label: "avoid structures", vessel: true },
-        step: { pins: [[72, 70], [128, 70], [72, 122], [128, 122]], zones: [[100, 78, 48, 30], [100, 124, 48, 30]], label: "stepwise top view", step: true },
-        adjunct: { pins: [[72, 74], [128, 74], [100, 132]], zones: [[100, 96, 60, 58]], label: "US + fusion", adjunct: true },
-        exposure: { pins: [[82, 96], [118, 96]], zones: [[100, 96, 42, 46]], label: "1.5-2.0 cm active tip", exposure: true },
-        field: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "field strength", field: true },
-        pulse: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "70-90 us pulses", pulse: true },
-        current: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "test current", current: true }
+      const map = {
+        two: "guide-b",
+        three: "guide-f",
+        five: "consensus-c",
+        six: "consensus-d",
+        spacing: "guide-b",
+        longAxis: "guide-h",
+        critical: "consensus-a",
+        step: "guide-c",
+        adjunct: "guide-d",
+        exposure: "guide-a",
+        field: "guide-b",
+        pulse: "guide-b",
+        current: "guide-b"
       };
-      const p = patterns[type] || patterns.two;
-      const links = (p.links || []).map(([x1, y1, x2, y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#e07000" stroke-width="2" stroke-dasharray="4 4"></line>`).join("");
-      const needleDots = p.pins.map(([x, y], index) => {
-        const marker = p.long ? `<ellipse class="needle-track" cx="${x}" cy="${y}" rx="5" ry="9" transform="rotate(72 ${x} ${y})"></ellipse>` : `<circle class="needle-dot" cx="${x}" cy="${y}" r="6"></circle>`;
-        return `${marker}<text x="${x + 8}" y="${y - 8}">N${index + 1}</text>`;
-      }).join("");
-      const zones = p.zones.map(([cx, cy, rx, ry]) => `<ellipse class="field-zone" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"></ellipse>`).join("");
-      const measure = p.measure ? '<line x1="76" y1="70" x2="124" y2="70" stroke="#e07000" stroke-width="2"></line><path d="M76 65v10M124 65v10" stroke="#e07000" stroke-width="2"></path><text x="67" y="61">1.5-2.2 cm</text>' : "";
-      const vessel = p.vessel ? '<path class="vessel" d="M48 136 C78 104 112 132 156 92"></path><text x="42" y="154">vessel / bile duct</text>' : "";
-      const adjunct = p.adjunct ? '<path d="M45 54 C69 38 126 32 158 52" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 4"></path><text x="44" y="40">fusion / CEUS</text>' : "";
-      const exposure = p.exposure ? '<rect x="70" y="140" width="60" height="12" rx="6" fill="#f59e0b" opacity=".75"></rect><text x="55" y="166">active tip 1.5-2.0 cm</text>' : "";
-      const pulseBits = p.pulse ? '<path d="M82 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path><path d="M114 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path>' : "";
-      const current = p.current ? '<path d="M68 136 C88 116 108 150 130 128" fill="none" stroke="#e07000" stroke-width="3"></path><text x="62" y="158">25-50 A</text>' : "";
-      const field = p.field ? '<path d="M74 118 C92 76 112 76 130 118" fill="none" stroke="#e07000" stroke-width="3"></path><text x="67" y="153">electric field</text>' : "";
-      const step = p.step ? '<path d="M72 82v26M128 82v26" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path><path d="M68 104l4 8 4-8M124 104l4 8 4-8" fill="none" stroke="#6b7280" stroke-width="2"></path>' : "";
+      const ref = map[type] || "guide-b";
+      const sourceLabel = {
+        "guide-a": "2023 guideline Fig. 3a",
+        "guide-b": "2023 guideline Fig. 3b",
+        "guide-c": "2023 guideline Fig. 3c",
+        "guide-d": "2023 guideline Fig. 3d",
+        "guide-f": "2023 guideline Fig. 3f",
+        "guide-h": "2023 guideline Fig. 3h",
+        "consensus-a": "2022 consensus Fig. 1A",
+        "consensus-c": "2022 consensus Fig. 1C",
+        "consensus-d": "2022 consensus Fig. 1D"
+      }[ref];
+      const guideShapes = {
+        "guide-a": { side: true, needles: [[78, 35, 78, 136], [132, 35, 132, 136]], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]] },
+        "guide-b": { tumor: "M47 96c0-24 24-38 56-38s58 14 58 38-26 38-58 38-56-14-56-38Z", fields: [[96, 96, 44, 34], [118, 96, 44, 34]], dots: [[70,96],[140,96]] },
+        "guide-c": { tumor: "M45 97c0-30 25-48 58-48s60 18 60 48-27 49-60 49-58-19-58-49Z", fields: [[105, 76, 58, 34], [105, 124, 58, 34]], dots: [[70,70],[140,70],[70,126],[140,126]], arrows: true },
+        "guide-d": { tumor: "M45 99c0-34 26-54 60-54s60 20 60 54-26 54-60 54-60-20-60-54Z", fields: [[105, 58, 58, 30], [105, 101, 58, 30], [105, 142, 58, 30]], dots: [[70,55],[140,55],[70,99],[140,99],[70,143],[140,143]], arrows: true },
+        "guide-f": { tumor: "M105 45 163 146H47Z", fields: [[105, 105, 50, 47]], dots: [[105,55],[68,132],[142,132]] },
+        "guide-h": { tumor: "M43 100c28-40 94-56 128 0-34 56-100 40-128 0Z", fields: [[100, 100, 60, 34]], dots: [[60,100],[100,62],[145,100],[100,138]], cross: true }
+      };
+      if (ref.startsWith("consensus")) {
+        const key = ref.slice(-1);
+        return `<svg class="needle-svg" viewBox="0 0 210 170" role="img" aria-label="${sourceLabel}">
+          ${vesselNeedleSvg(key)}
+          <text x="36" y="158">${sourceLabel}</text>
+        </svg>`;
+      }
+      const p = guideShapes[ref];
+      const fields = (p.fields || []).map(([cx, cy, rx, ry]) => `<ellipse class="field-zone" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"></ellipse>`).join("");
+      const dots = (p.dots || []).map(([x,y]) => `<circle class="needle-dot" cx="${x}" cy="${y}" r="5"></circle>`).join("");
+      const needles = (p.needles || []).map(([x1,y1,x2,y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#0ea5e9" stroke-width="7" stroke-linecap="round"></line><line x1="${x2}" y1="${y2}" x2="${x2-9}" y2="${y2+23}" stroke="#374151" stroke-width="3" stroke-linecap="round"></line>`).join("");
+      const arrows = p.arrows ? '<path d="M105 78v35M105 118v25" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
+      const cross = p.cross ? '<path d="M55 100h100M105 50v100" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
       return `
-        <svg class="needle-svg" viewBox="0 0 200 200" role="img" aria-label="Planar top-view needle placement diagram">
-          <path class="liver-shape" d="M38 100c0-42 36-66 78-64 34 2 58 15 70 39 10 20 5 49-14 68-27 27-77 34-109 12-17-12-25-31-25-55Z"></path>
-          ${zones}
-          <ellipse class="margin" cx="100" cy="96" rx="50" ry="55"></ellipse>
-          <ellipse class="tumor" cx="100" cy="96" rx="28" ry="31"></ellipse>
-          ${vessel}
-          ${adjunct}
-          ${measure}
-          ${links}
-          ${exposure}
-          ${field}
-          ${pulseBits}
-          ${current}
-          ${step}
-          ${needleDots}
-          <text x="48" y="188">${p.label}</text>
+        <svg class="needle-svg" viewBox="0 0 210 180" role="img" aria-label="${sourceLabel}">
+          <path d="${p.tumor}" fill="#facc15" opacity=".68" stroke="#f59e0b" stroke-width="2"></path>
+          ${fields}
+          ${arrows}${cross}${needles}${dots}
+          <text x="34" y="166">${sourceLabel}</text>
         </svg>
       `;
     }
@@ -2710,30 +2734,30 @@
         <div class="needle-plan-grid">
           ${needleData.sizePlans.map(item => `
             <article class="needle-plan-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
-              <span class="source-pill">${item.source}</span>
+              <span class="source-pill">${sourceName(item.source, item.enSource)}</span>
               ${needleSvg(item.diagram)}
-              <strong>${item.title}${bi(item.enTitle)}</strong>
-              <span>${item.body}${bi(item.enBody)}</span>
+              <strong>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</strong>
+              <span>${tx(item.body, item.enBody)}${bi(item.enBody)}</span>
             </article>
           `).join("")}
         </div>
         <div class="needle-rule-grid">
           ${needleData.rules.map(item => `
             <article class="needle-rule-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
-              <span class="source-pill">${item.source}</span>
+              <span class="source-pill">${sourceName(item.source, item.enSource)}</span>
               ${needleSvg(item.diagram)}
-              <strong>${item.title}${bi(item.enTitle)}</strong>
-              <span>${item.body}${bi(item.enBody)}</span>
+              <strong>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</strong>
+              <span>${tx(item.body, item.enBody)}${bi(item.enBody)}</span>
             </article>
           `).join("")}
         </div>
         <div class="needle-param-grid">
           ${needleData.parameters.map(item => `
             <article class="needle-param-card searchable" data-text="${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
-              <span class="source-pill">参数 / Parameters</span>
+              <span class="source-pill">${tx("参数", "Parameters")}</span>
               ${needleSvg(item.diagram)}
-              <strong>${item.title}${bi(item.enTitle)}</strong>
-              <span>${item.body}${bi(item.enBody)}</span>
+              <strong>${tx(item.title, item.enTitle)}${bi(item.enTitle)}</strong>
+              <span>${tx(item.body, item.enBody)}${bi(item.enBody)}</span>
             </article>
           `).join("")}
         </div>
@@ -2742,14 +2766,14 @@
 
     function guidelineNeedleFigure(kind, label) {
       const configs = {
-        a: { needles: [], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]], dots: [[70,96],[140,96]], text: "2针俯视 / top" },
-        b: { needles: [], tumor: "M47 96c0-24 24-38 56-38s58 14 58 38-26 38-58 38-56-14-56-38Z", fields: [[96, 96, 44, 34], [118, 96, 44, 34]], dots: [[70,96],[140,96]], text: "俯视 / top" },
-        c: { needles: [], tumor: "M45 97c0-30 25-48 58-48s60 18 60 48-27 49-60 49-58-19-58-49Z", fields: [[105, 76, 58, 34], [105, 124, 58, 34]], dots: [[70,70],[140,70],[70,126],[140,126]], arrows: true, text: "移动扩大 / shift" },
-        d: { needles: [], tumor: "M45 99c0-34 26-54 60-54s60 20 60 54-26 54-60 54-60-20-60-54Z", fields: [[105, 58, 58, 30], [105, 101, 58, 30], [105, 142, 58, 30]], dots: [[70,55],[140,55],[70,99],[140,99],[70,143],[140,143]], arrows: true, text: "分段覆盖 / stacked" },
-        e: { needles: [], tumor: "M42 96c0-35 26-54 63-54s63 19 63 54-26 54-63 54-63-19-63-54Z", fields: [[83, 86, 42, 38], [126, 106, 42, 38]], dots: [[66,96],[105,64],[144,116]], links: [[66,96,105,64],[105,64,144,116],[144,116,66,96]], text: "3针俯视 / top" },
-        f: { needles: [], tumor: "M105 45 163 146H47Z", fields: [[105, 105, 50, 47]], dots: [[105,55],[68,132],[142,132]], text: "三角覆盖 / triangle" },
-        g: { needles: [], tumor: "M105 32c32 28 52 68 49 107-31 18-68 18-98 0-3-39 17-79 49-107Z", fields: [[105, 96, 52, 74]], dots: [[105,45],[60,105],[150,105],[105,151]], cross: true, text: "移动第3针 / move" },
-        h: { needles: [], tumor: "M43 100c28-40 94-56 128 0-34 56-100 40-128 0Z", fields: [[100, 100, 60, 34]], dots: [[60,100],[100,62],[145,100],[100,138]], cross: true, text: "适形覆盖 / conformal" }
+        a: { needles: [[78, 35, 78, 136], [132, 35, 132, 136]], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]], text: tx("2针侧视", "2-needle side view") },
+        b: { needles: [], tumor: "M47 96c0-24 24-38 56-38s58 14 58 38-26 38-58 38-56-14-56-38Z", fields: [[96, 96, 44, 34], [118, 96, 44, 34]], dots: [[70,96],[140,96]], text: tx("俯视", "top view") },
+        c: { needles: [], tumor: "M45 97c0-30 25-48 58-48s60 18 60 48-27 49-60 49-58-19-58-49Z", fields: [[105, 76, 58, 34], [105, 124, 58, 34]], dots: [[70,70],[140,70],[70,126],[140,126]], arrows: true, text: tx("移动扩大", "shift coverage") },
+        d: { needles: [], tumor: "M45 99c0-34 26-54 60-54s60 20 60 54-26 54-60 54-60-20-60-54Z", fields: [[105, 58, 58, 30], [105, 101, 58, 30], [105, 142, 58, 30]], dots: [[70,55],[140,55],[70,99],[140,99],[70,143],[140,143]], arrows: true, text: tx("分段覆盖", "stacked coverage") },
+        e: { needles: [[62, 35, 62, 136], [105, 35, 105, 136], [148, 35, 148, 136]], tumor: "M42 96c0-35 26-54 63-54s63 19 63 54-26 54-63 54-63-19-63-54Z", fields: [[83, 96, 33, 42], [126, 96, 33, 42]], text: tx("3针侧视", "3-needle side view") },
+        f: { needles: [], tumor: "M105 45 163 146H47Z", fields: [[105, 105, 50, 47]], dots: [[105,55],[68,132],[142,132]], text: tx("三角覆盖", "triangular coverage") },
+        g: { needles: [], tumor: "M105 32c32 28 52 68 49 107-31 18-68 18-98 0-3-39 17-79 49-107Z", fields: [[105, 96, 52, 74]], dots: [[105,45],[60,105],[150,105],[105,151]], cross: true, text: tx("移动第3针", "move the 3rd needle") },
+        h: { needles: [], tumor: "M43 100c28-40 94-56 128 0-34 56-100 40-128 0Z", fields: [[100, 100, 60, 34]], dots: [[60,100],[100,62],[145,100],[100,138]], cross: true, text: tx("适形覆盖", "conformal coverage") }
       };
       const c = configs[kind] || configs.a;
       const fields = (c.fields || []).map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="rgba(245,158,11,.34)" stroke="#f59e0b" stroke-width="1.4"></ellipse>`).join("");
@@ -2772,24 +2796,30 @@
       `;
     }
 
-    function vesselNeedleFigure(kind, label) {
+    function vesselNeedleSvg(kind) {
       const configs = {
-        a: { pins: [[42,45],[32,132],[154,134]], artery: [142,45], vein: [112,125], text: "3 支 / 3 needles" },
-        b: { pins: [[54,42],[35,132],[155,135],[162,43]], artery: [140,45], vein: [118,126], text: "4 支 / 4 needles" },
-        c: { pins: [[52,42],[36,132],[104,92],[156,136],[162,43]], artery: [137,45], vein: [122,126], text: "5 支 / 5 needles" },
-        d: { pins: [[52,42],[36,132],[92,150],[142,150],[158,136],[162,43]], artery: [136,45], vein: [120,126], text: "6 支 / 6 needles" }
+        a: { pins: [[80,20],[28,118],[151,125]], artery: [139,44], vein: [115,123], text: tx("3 支", "3 needles") },
+        b: { pins: [[54,40],[31,126],[154,132],[162,42]], artery: [140,45], vein: [118,126], text: tx("4 支", "4 needles") },
+        c: { pins: [[52,42],[36,132],[104,92],[156,136],[162,43]], artery: [137,45], vein: [122,126], text: tx("5 支", "5 needles") },
+        d: { pins: [[52,42],[36,132],[92,150],[142,150],[158,136],[162,43]], artery: [136,45], vein: [120,126], text: tx("6 支", "6 needles") }
       };
       const c = configs[kind] || configs.a;
       const pins = c.pins.map(([x,y]) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="#111827"></ellipse>`).join("");
       return `
+        <circle cx="84" cy="88" r="58" fill="#f59e0b" opacity=".72"></circle>
+        <circle cx="${c.artery[0]}" cy="${c.artery[1]}" r="25" fill="#ef4444"></circle>
+        <circle cx="${c.vein[0]}" cy="${c.vein[1]}" r="21" fill="#4f46e5" opacity=".82"></circle>
+        ${pins}
+        <text x="42" y="145" fill="#715a50" font-size="12">${c.text}</text>
+      `;
+    }
+
+    function vesselNeedleFigure(kind, label) {
+      return `
         <article class="needle-figure-card">
           <strong>${label}</strong>
           <svg viewBox="0 0 210 170" role="img" aria-label="${label}">
-            <circle cx="84" cy="88" r="58" fill="#f59e0b" opacity=".72"></circle>
-            <circle cx="${c.artery[0]}" cy="${c.artery[1]}" r="25" fill="#ef4444"></circle>
-            <circle cx="${c.vein[0]}" cy="${c.vein[1]}" r="21" fill="#4f46e5" opacity=".82"></circle>
-            ${pins}
-            <text x="42" y="158" fill="#715a50" font-size="12">${c.text}</text>
+            ${vesselNeedleSvg(kind)}
           </svg>
         </article>
       `;
@@ -2801,31 +2831,31 @@
       wrap.innerHTML = `
         <section class="needle-figure-board searchable" data-text="指南 图3 a b c d e f g h 2针 3针 电场分布 肝癌">
           <div>
-            <p class="needle-figure-title">指南图示重绘：2 针与 3 针 IRE 电极平面布针方案</p>
-            <p class="en-line">Redrawn guideline-style top-view diagrams: 2-needle and 3-needle IRE electrode placement patterns.</p>
+            <p class="needle-figure-title">${tx("2023 指南图 3 重绘：不可逆电穿孔消融电极针布针方案", "2023 guideline Fig. 3 redraw: IRE electrode placement schemes")}</p>
+            <p class="en-line">This redraw follows the original Fig. 3 layout: a/e are side views; b/c/d/f/g/h are top views.</p>
           </div>
           <div class="needle-figure-grid">
             ${["a","b","c","d","e","f","g","h"].map(key => guidelineNeedleFigure(key, key)).join("")}
           </div>
           <div class="needle-legend">
-            <span><i class="legend-dot"></i>IRE 电场分布 / field</span>
-            <span><i class="legend-dot gray"></i>肝癌 / tumor</span>
-            <span><i class="legend-dot blue"></i>IRE 电极针 / electrode</span>
+            <span><i class="legend-dot"></i>${tx("IRE 电场分布", "IRE field")}</span>
+            <span><i class="legend-dot gray"></i>${tx("肝癌", "Tumor")}</span>
+            <span><i class="legend-dot blue"></i>${tx("IRE 电极针", "IRE electrode")}</span>
           </div>
         </section>
         <section class="needle-figure-board searchable" data-text="共识 图1 1A 1B 1C 1D 3-6支 电极针 肿瘤 动脉 静脉">
           <div>
-            <p class="needle-figure-title">共识图示重绘：3-6 支电极针与肿瘤、动静脉平面关系</p>
-            <p class="en-line">Redrawn consensus-style top-view diagrams: relationship between 3-6 electrodes, tumor, artery, and vein.</p>
+            <p class="needle-figure-title">${tx("2022 共识图 1 重绘：3-6 支电极针与肿瘤、动静脉关系", "2022 consensus Fig. 1 redraw: 3-6 electrodes relative to tumor, artery, and vein")}</p>
+            <p class="en-line">This redraw follows the original Fig. 1A-1D relationship between electrodes, tumor, artery, and vein.</p>
           </div>
           <div class="needle-figure-grid">
             ${["a","b","c","d"].map((key, index) => vesselNeedleFigure(key, `1${String.fromCharCode(65 + index)}`)).join("")}
           </div>
           <div class="needle-legend">
-            <span><i class="legend-dot red"></i>动脉 / artery</span>
-            <span><i class="legend-dot blue"></i>静脉 / vein</span>
-            <span><i class="legend-dot"></i>肿瘤 / tumor</span>
-            <span><i class="legend-dot gray"></i>IRE 电极针 / electrode</span>
+            <span><i class="legend-dot red"></i>${tx("动脉", "Artery")}</span>
+            <span><i class="legend-dot blue"></i>${tx("静脉", "Vein")}</span>
+            <span><i class="legend-dot"></i>${tx("肿瘤", "Tumor")}</span>
+            <span><i class="legend-dot gray"></i>${tx("IRE 电极针", "IRE electrode")}</span>
           </div>
         </section>
       `;
@@ -2896,6 +2926,53 @@
       return { title, needles, strategy, diagram, source, notes, warnings };
     }
 
+    function getNeedleRecommendationEnglish(size, count, guidance, intent, critical, irregular, biliary, rec) {
+      if (!Number.isFinite(size) || size <= 0) {
+        return {
+          ...rec,
+          title: "Enter a valid maximum tumor diameter",
+          needles: "Pending",
+          strategy: "The maximum diameter D must be greater than 0 cm.",
+          source: "2022 consensus + 2023 guideline",
+          notes: ["Input unit: cm."],
+          warnings: []
+        };
+      }
+      let title = "Small lesion: prioritize paired parallel electrodes";
+      let needles = guidance === "us" ? "Usually 2, add a 3rd if needed" : "2-3 electrodes";
+      let strategy = "Place two parallel electrodes on both sides of the lesion without directly puncturing the tumor; cover the tumor plus at least a 0.5 cm margin.";
+      if (size > 2 && size <= 3) {
+        title = "Medium lesion: use 3-4 electrodes or staged 2-electrode ablation";
+        needles = guidance === "us" ? "2-3 electrodes" : "3-4 electrodes";
+        strategy = "Use three electrodes to form paired ablation zones; if the anatomy is complex, use two electrodes with staged repositioning.";
+      } else if (size > 3 && size <= 4) {
+        title = "Larger lesion: plan 3-5 electrodes along the lesion shape";
+        needles = guidance === "us" ? "Staged 2-3 electrode placement or CT assistance" : "3-5 electrodes";
+        strategy = "Plan along the long axis and tumor shape; pull-back or staged ablation may be required.";
+      } else if (size > 4 && size <= 5) {
+        title = "Near the upper size range: 4-6 electrodes with strict overlap control";
+        needles = guidance === "us" ? "Staged placement or CT assistance" : "4-6 electrodes";
+        strategy = "Use 4-6 electrodes when feasible; avoid excessive overlap and avoid more than three repeats in the same region whenever possible.";
+      } else if (size > 5) {
+        title = "Beyond usual curative-size criteria";
+        needles = "Do not apply routine curative placement mechanically";
+        strategy = "Use multidisciplinary planning for palliative ablation or combined treatment rather than relying on this calculator alone.";
+      }
+      const notes = [
+        `Lesion count: ${Number.isFinite(count) ? count : 1}.`,
+        "Parameter reminder: active tip 1.5-2.0 cm, spacing about 1.5-2.2 cm in the consensus, pulse width 70-90 us, and 10-20 test pulses first."
+      ];
+      const warnings = [];
+      if (critical) {
+        warnings.push("Near hilum/vessels/bile duct/bowel/diaphragm: avoid electrode tips contacting critical structures and avoid electrodes tightly against vessel walls.");
+      }
+      if (irregular) notes.push("Irregular lesion: prioritize long-axis placement and consider pull-back ablation.");
+      if (biliary) warnings.push("Biliary obstruction or infection risk: manage drainage/infection risk before ablation.");
+      if (intent === "palliative") notes.push("For palliative or combination intent, placement should serve debulking, symptom control, or the combined-treatment plan.");
+      if (size > 5) warnings.push("D > 5 cm: do not decide electrode placement solely from this tool.");
+      return { ...rec, title, needles, strategy, source: "2022 consensus + 2023 guideline", notes, warnings };
+    }
+
     function renderNeedlePlanner() {
       const result = document.getElementById("needlePlannerResult");
       if (!result) return;
@@ -2906,7 +2983,8 @@
       const critical = Boolean(document.getElementById("criticalInput")?.checked);
       const irregular = Boolean(document.getElementById("irregularInput")?.checked);
       const biliary = Boolean(document.getElementById("biliaryInput")?.checked);
-      const rec = getNeedleRecommendation(size, count, guidance, intent, critical, irregular, biliary);
+      const rawRec = getNeedleRecommendation(size, count, guidance, intent, critical, irregular, biliary);
+      const rec = isEnglish() ? getNeedleRecommendationEnglish(size, count, guidance, intent, critical, irregular, biliary, rawRec) : rawRec;
       result.innerHTML = `
         <div>${needleSvg(rec.diagram)}</div>
         <div>
@@ -2916,10 +2994,10 @@
             <span class="planner-badge">${rec.source}</span>
           </div>
           <h3>${rec.title}</h3>
-          <p><strong>建议策略：</strong>${rec.strategy}</p>
-          <p><strong>电极针数量：</strong>${rec.needles}</p>
-          <p><strong>图示说明：</strong>下方图示均为平面/俯视布针关系，用于展示电极与肿瘤、血管或胆管的横断面位置，不代表实际进针角度、路径或深度。<span class="en-line">All needle diagrams are planar top-view relationship sketches, not the actual insertion angle, route, or depth.</span></p>
-          ${rec.warnings.length ? `<p><strong>红线提醒：</strong>${rec.warnings.join("；")}</p>` : ""}
+          <p><strong>${tx("建议策略", "Strategy")}：</strong>${rec.strategy}</p>
+          <p><strong>${tx("电极针数量", "Electrode number")}：</strong>${rec.needles}</p>
+          <p><strong>${tx("图示说明", "Diagram note")}：</strong>${tx("SOP 中的小图均复用指南/共识原图结构；其中指南图 3a/3e 为原文侧视，其余图按原文俯视关系重绘。", "SOP thumbnails reuse the original guideline/consensus figure structures. Guideline Fig. 3a/3e are side views in the source; the other diagrams follow the original top-view relationships.")}</p>
+          ${rec.warnings.length ? `<p><strong>${tx("红线提醒", "Red flags")}：</strong>${rec.warnings.join(isEnglish() ? "; " : "；")}</p>` : ""}
           <ul>${rec.notes.map(note => `<li>${note}</li>`).join("")}</ul>
         </div>
       `;
@@ -3310,21 +3388,117 @@
       });
     }
 
+    const staticI18n = {
+      "肝癌 IRE 轻松学": "Liver Cancer IRE Learning",
+      "知识库 · 题库 · SOP": "Knowledge Base · Quiz · SOP",
+      "安装": "Install",
+      "学习进度": "Learning Progress",
+      "首页": "Home",
+      "知识库": "Knowledge",
+      "用药模块": "Medication",
+      "SOP流程": "SOP",
+      "考试题库": "Quiz",
+      "肝癌 IRE 消融专家共识与临床实践指南": "Expert Consensus and Clinical Practice Guideline for Liver Cancer IRE",
+      "肝癌 IRE 治疗注意事项": "Liver Cancer IRE Treatment Notes",
+      "IRE 可以理解为：用高压电脉冲精准处理肝内病灶，尽量保护邻近血管、胆管、肠道、膈肌和肝门等重要结构。": "IRE uses high-voltage electrical pulses to ablate liver tumors while preserving adjacent vessels, bile ducts, bowel, diaphragm, and hepatic hilum structures.",
+      "进入知识库": "Open Knowledge Base",
+      "查看 SOP": "View SOP",
+      "本应用用于医学学习与共识理解，不替代临床诊疗决策。实际治疗需结合患者病情、医院条件和临床规范。": "This app is for medical education and consensus learning only. It does not replace clinical decisions or institutional protocols.",
+      "把专家共识整理成可查、可学、可复习的知识库": "A searchable and reviewable knowledge base from the consensus and guideline",
+      "主要包含指南核心内容、适应证、禁忌证、并发症、手术方式、随访与疗效评价。收藏按钮会记录你的重点。": "Covers core recommendations, indications, contraindications, complications, workflow, follow-up, and response assessment.",
+      "重置进度": "Reset Progress",
+      "SOP 操作流程": "SOP Workflow",
+      "按标准作业步骤理解 IRE 治疗": "Understand IRE treatment by standard operating steps",
+      "主入口是 SOP 指导；其他标签作为术前、布针、随访和并发症的补充速查。": "Use SOP as the main workflow; other tabs provide quick references for preparation, electrode placement, follow-up, and complications.",
+      "SOP 指导": "SOP Guide",
+      "适合谁": "Eligibility",
+      "术前准备": "Preparation",
+      "布针记忆": "Needle Layout",
+      "随访日历": "Follow-up",
+      "疗效与复发": "Response",
+      "并发症": "Complications",
+      "布针口诀": "Needle Layout Rule",
+      "针要平行，也要覆盖安全边界": "Keep electrodes parallel and cover the safety margin",
+      "根治性治疗中消融区应完全覆盖病灶及周围 0.5 cm 以上。两针裸露段之间形成有效消融区域，针要尽量两两平行、深度一致；靠近血管、胆囊、肠管时避免针尖垂直接触重要结构。": "For curative treatment, the ablation zone should cover the lesion plus at least 0.5 cm. The effective ablation area forms between exposed electrode segments; paired electrodes should be parallel and depth-matched. Avoid direct perpendicular contact with critical structures near vessels, gallbladder, or bowel.",
+      "布针建议计算器": "Needle Recommendation Calculator",
+      "输入肿瘤大小，生成布针建议": "Enter Tumor Size to Generate a Recommendation",
+      "按指南/共识的病灶大小、电极针数、超声 2-3 针限制和高危部位注意事项生成培训用建议。": "Generates a training recommendation from guideline/consensus tumor-size thresholds, electrode number, ultrasound 2-3 electrode limits, and high-risk anatomy precautions.",
+      "最大径 D（cm）": "Maximum Diameter D (cm)",
+      "病灶数": "Lesion Count",
+      "引导方式": "Guidance",
+      "治疗目标": "Treatment Intent",
+      "根治性消融": "Curative Ablation",
+      "姑息/联合治疗": "Palliative / Combination",
+      "邻近肝门/血管/胆管/肠道/膈肌": "Near Hilum / Vessels / Bile Duct / Bowel / Diaphragm",
+      "形态不规则或长轴明显": "Irregular Shape or Obvious Long Axis",
+      "胆道梗阻或胆道感染风险": "Biliary Obstruction or Infection Risk",
+      "肝脏布针全表": "Complete Liver Needle Layout Table",
+      "把指南和共识里的肝脏布针都放在这里": "Needle Layouts from the Guideline and Consensus",
+      "覆盖病灶大小对应电极针数、超声 2/3 针方案、CT/超声引导要点、针距与参数、特殊结构旁注意事项。": "Covers electrode number by tumor size, ultrasound 2-/3-electrode schemes, CT/US guidance points, spacing and parameters, and precautions near critical structures.",
+      "上一题": "Previous",
+      "下一题": "Next",
+      "答对题数": "Correct",
+      "当前正确率": "Accuracy",
+      "收藏重点": "Saved"
+    };
+
+    const staticI18nReverse = Object.fromEntries(Object.entries(staticI18n).map(([zh, en]) => [en, zh]));
+
+    function translateTextNode(node, dictionary) {
+      const value = node.nodeValue;
+      const trimmed = value.trim();
+      if (!trimmed || !dictionary[trimmed]) return;
+      node.nodeValue = value.replace(trimmed, dictionary[trimmed]);
+    }
+
+    function applyStaticTranslations() {
+      const dictionary = isEnglish() ? staticI18n : staticI18nReverse;
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || ["SCRIPT", "STYLE", "SVG"].includes(parent.closest("script,style,svg")?.tagName)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => translateTextNode(node, dictionary));
+      const search = document.getElementById("searchInput");
+      if (search) search.placeholder = isEnglish() ? "Search Child-Pugh, bile duct, needles, thrombosis..." : "搜 Child-Pugh、胆管、布针、血栓...";
+    }
+
+    function rerenderLanguageSensitiveContent() {
+      renderRecommendations();
+      renderStory();
+      renderPrep();
+      renderTimeline();
+      renderTerms();
+      renderNeedlePlans();
+      renderNeedleFigures();
+      renderNeedlePlanner();
+      renderQuiz();
+      applyStaticTranslations();
+    }
+
     function setupLanguageToggle() {
       const button = document.getElementById("langToggle");
       if (!button) return;
       const apply = () => {
-        document.body.classList.toggle("hide-en", appState.hideEnglish);
-        button.textContent = appState.hideEnglish ? "中文" : "中英";
-        button.setAttribute("aria-pressed", String(!appState.hideEnglish));
-        button.title = appState.hideEnglish ? "显示英文" : "隐藏英文";
-        localStorage.setItem("ireHideEnglish", String(appState.hideEnglish));
+        document.documentElement.lang = isEnglish() ? "en" : "zh-CN";
+        document.body.classList.toggle("lang-en", isEnglish());
+        document.body.classList.toggle("lang-zh", !isEnglish());
+        button.textContent = isEnglish() ? "English" : "中文";
+        button.setAttribute("aria-pressed", String(isEnglish()));
+        button.title = isEnglish() ? "Switch to Chinese" : "切换到英文";
+        localStorage.setItem("ireLanguage", appState.language);
       };
       button.addEventListener("click", () => {
-        appState.hideEnglish = !appState.hideEnglish;
+        appState.language = isEnglish() ? "zh" : "en";
         apply();
+        rerenderLanguageSensitiveContent();
       });
       apply();
+      applyStaticTranslations();
     }
 
     function setupServiceWorker() {
