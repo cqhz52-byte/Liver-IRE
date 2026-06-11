@@ -1,11 +1,12 @@
-const CACHE_NAME = "ire-consensus-pwa-v10";
+const CACHE_NAME = "ire-consensus-pwa-v11";
 const CORE_ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./assets/curaway-logo.png"
+  "./assets/curaway-logo.png",
+  "./assets/share-card.png"
 ];
 
 self.addEventListener("install", event => {
