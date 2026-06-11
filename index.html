@@ -1017,6 +1017,72 @@
       font-weight: 800;
     }
 
+    .needle-figure-board {
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+      background: #fffaf4;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .needle-figure-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .needle-figure-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .needle-figure-card {
+      min-width: 0;
+      padding: 10px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .needle-figure-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .needle-figure-card svg {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.2 / 1;
+    }
+
+    .needle-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      vertical-align: -1px;
+      border-radius: 999px;
+      background: var(--teal-2);
+    }
+
+    .legend-dot.gray { background: #6b7280; }
+    .legend-dot.blue { background: #4f46e5; }
+    .legend-dot.red { background: #ef4444; }
+
     .timeline {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1329,6 +1395,7 @@
       .needle-plan-grid,
       .needle-rule-grid,
       .needle-param-grid,
+      .needle-figure-grid,
       .timeline,
       .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1508,6 +1575,7 @@
       .needle-plan-grid,
       .needle-rule-grid,
       .needle-param-grid,
+      .needle-figure-grid,
       .mini-diagram {
         grid-template-columns: 1fr;
       }
@@ -1854,6 +1922,7 @@
                   </div>
                 </div>
                 <div id="needlePlans"></div>
+                <div id="needleFigures"></div>
               </div>
             </div>
 
@@ -2511,6 +2580,96 @@
       `;
     }
 
+    function guidelineNeedleFigure(kind, label) {
+      const configs = {
+        a: { needles: [[78, 36, 78, 134], [132, 36, 132, 134]], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]], text: "侧视 / side" },
+        b: { needles: [], tumor: "M47 96c0-24 24-38 56-38s58 14 58 38-26 38-58 38-56-14-56-38Z", fields: [[96, 96, 44, 34], [118, 96, 44, 34]], dots: [[70,96],[140,96]], text: "俯视 / top" },
+        c: { needles: [], tumor: "M45 97c0-30 25-48 58-48s60 18 60 48-27 49-60 49-58-19-58-49Z", fields: [[105, 76, 58, 34], [105, 124, 58, 34]], dots: [[70,70],[140,70],[70,126],[140,126]], arrows: true, text: "移动扩大 / shift" },
+        d: { needles: [], tumor: "M45 99c0-34 26-54 60-54s60 20 60 54-26 54-60 54-60-20-60-54Z", fields: [[105, 58, 58, 30], [105, 101, 58, 30], [105, 142, 58, 30]], dots: [[70,55],[140,55],[70,99],[140,99],[70,143],[140,143]], arrows: true, text: "分段覆盖 / stacked" },
+        e: { needles: [[62, 36, 62, 134], [105, 36, 105, 134], [148, 36, 148, 134]], tumor: "M42 96c0-35 26-54 63-54s63 19 63 54-26 54-63 54-63-19-63-54Z", fields: [[83, 96, 33, 42], [126, 96, 33, 42]], text: "3 针侧视 / side" },
+        f: { needles: [], tumor: "M105 45 163 146H47Z", fields: [[105, 105, 50, 47]], dots: [[105,55],[68,132],[142,132]], text: "三角覆盖 / triangle" },
+        g: { needles: [], tumor: "M105 32c32 28 52 68 49 107-31 18-68 18-98 0-3-39 17-79 49-107Z", fields: [[105, 96, 52, 74]], dots: [[105,45],[60,105],[150,105],[105,151]], cross: true, text: "移动第3针 / move" },
+        h: { needles: [], tumor: "M43 100c28-40 94-56 128 0-34 56-100 40-128 0Z", fields: [[100, 100, 60, 34]], dots: [[60,100],[100,62],[145,100],[100,138]], cross: true, text: "适形覆盖 / conformal" }
+      };
+      const c = configs[kind] || configs.a;
+      const fields = (c.fields || []).map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="rgba(245,158,11,.34)" stroke="#f59e0b" stroke-width="1.4"></ellipse>`).join("");
+      const needles = (c.needles || []).map(([x1,y1,x2,y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#0ea5e9" stroke-width="7" stroke-linecap="round"></line><line x1="${x2}" y1="${y2}" x2="${x2-10}" y2="${y2+24}" stroke="#374151" stroke-width="3" stroke-linecap="round"></line>`).join("");
+      const dots = (c.dots || []).map(([x,y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#111827"></circle>`).join("");
+      const arrows = c.arrows ? '<path d="M105 78v35M105 118v25" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
+      const cross = c.cross ? '<path d="M55 100h100M105 50v100" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
+      return `
+        <article class="needle-figure-card">
+          <strong>${label}</strong>
+          <svg viewBox="0 0 210 180" role="img" aria-label="${label}">
+            <path d="${c.tumor}" fill="#facc15" opacity=".68" stroke="#f59e0b" stroke-width="2"></path>
+            ${fields}
+            ${arrows}${cross}
+            ${needles}${dots}
+            <text x="42" y="166" fill="#715a50" font-size="12">${c.text}</text>
+          </svg>
+        </article>
+      `;
+    }
+
+    function vesselNeedleFigure(kind, label) {
+      const configs = {
+        a: { pins: [[42,45],[32,132],[154,134]], artery: [142,45], vein: [112,125], text: "3 支 / 3 needles" },
+        b: { pins: [[54,42],[35,132],[155,135],[162,43]], artery: [140,45], vein: [118,126], text: "4 支 / 4 needles" },
+        c: { pins: [[52,42],[36,132],[104,92],[156,136],[162,43]], artery: [137,45], vein: [122,126], text: "5 支 / 5 needles" },
+        d: { pins: [[52,42],[36,132],[92,150],[142,150],[158,136],[162,43]], artery: [136,45], vein: [120,126], text: "6 支 / 6 needles" }
+      };
+      const c = configs[kind] || configs.a;
+      const pins = c.pins.map(([x,y]) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="#111827"></ellipse>`).join("");
+      return `
+        <article class="needle-figure-card">
+          <strong>${label}</strong>
+          <svg viewBox="0 0 210 170" role="img" aria-label="${label}">
+            <circle cx="84" cy="88" r="58" fill="#f59e0b" opacity=".72"></circle>
+            <circle cx="${c.artery[0]}" cy="${c.artery[1]}" r="25" fill="#ef4444"></circle>
+            <circle cx="${c.vein[0]}" cy="${c.vein[1]}" r="21" fill="#4f46e5" opacity=".82"></circle>
+            ${pins}
+            <text x="42" y="158" fill="#715a50" font-size="12">${c.text}</text>
+          </svg>
+        </article>
+      `;
+    }
+
+    function renderNeedleFigures() {
+      const wrap = document.getElementById("needleFigures");
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <section class="needle-figure-board searchable" data-text="指南 图3 a b c d e f g h 2针 3针 电场分布 肝癌">
+          <div>
+            <p class="needle-figure-title">指南图示重绘：2 针与 3 针 IRE 电极布针方案</p>
+            <p class="en-line">Redrawn guideline-style diagrams: 2-needle and 3-needle IRE electrode placement patterns.</p>
+          </div>
+          <div class="needle-figure-grid">
+            ${["a","b","c","d","e","f","g","h"].map(key => guidelineNeedleFigure(key, key)).join("")}
+          </div>
+          <div class="needle-legend">
+            <span><i class="legend-dot"></i>IRE 电场分布 / field</span>
+            <span><i class="legend-dot gray"></i>肝癌 / tumor</span>
+            <span><i class="legend-dot blue"></i>IRE 电极针 / electrode</span>
+          </div>
+        </section>
+        <section class="needle-figure-board searchable" data-text="共识 图1 1A 1B 1C 1D 3-6支 电极针 肿瘤 动脉 静脉">
+          <div>
+            <p class="needle-figure-title">共识图示重绘：3-6 支电极针与肿瘤、动静脉关系</p>
+            <p class="en-line">Redrawn consensus-style diagrams: relationship between 3-6 electrodes, tumor, artery, and vein.</p>
+          </div>
+          <div class="needle-figure-grid">
+            ${["a","b","c","d"].map((key, index) => vesselNeedleFigure(key, `1${String.fromCharCode(65 + index)}`)).join("")}
+          </div>
+          <div class="needle-legend">
+            <span><i class="legend-dot red"></i>动脉 / artery</span>
+            <span><i class="legend-dot blue"></i>静脉 / vein</span>
+            <span><i class="legend-dot"></i>肿瘤 / tumor</span>
+            <span><i class="legend-dot gray"></i>IRE 电极针 / electrode</span>
+          </div>
+        </section>
+      `;
+    }
+
     function getQuizEntry(index = appState.quizIndex) {
       const raw = appState.quizAnswers[index];
       if (raw && typeof raw === "object" && "value" in raw) return raw;
@@ -2912,6 +3071,7 @@
       renderStory();
       renderPrep();
       renderNeedlePlans();
+      renderNeedleFigures();
       renderTimeline();
       renderTerms();
       renderQuiz();
