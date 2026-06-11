@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#9f1239">
+  <meta name="theme-color" content="#e07000">
   <meta name="description" content="肝癌不可逆电穿孔消融治疗专家共识与临床实践指南知识库、考试题库与 SOP 操作流程 PWA。">
   <meta name="keywords" content="IRE, 肝癌, 肝脏恶性肿瘤, 纳米刀, 专家共识, 临床实践指南, SOP, 考试题库">
   <meta property="og:type" content="website">
@@ -37,15 +37,15 @@
       --ink: #241613;
       --muted: #715a50;
       --line: #ead7c8;
-      --teal: #9f1239;
-      --teal-2: #f97316;
+      --teal: #e07000;
+      --teal-2: #f59e0b;
       --blue: #4f46e5;
       --amber: #b45309;
-      --rose: #be123c;
+      --rose: #c2410c;
       --mint: #fee2e2;
       --sky: #ede9fe;
       --sand: #fef3c7;
-      --pink: #ffe4e6;
+      --pink: #ffedd5;
       --shadow: 0 10px 28px rgba(75, 34, 18, .08);
       --radius: 8px;
       font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, Segoe UI, sans-serif;
@@ -116,8 +116,8 @@
       height: 42px;
       border-radius: var(--radius);
       color: white;
-      background: linear-gradient(135deg, #9f1239, #f97316);
-      box-shadow: 0 10px 24px rgba(159, 18, 57, .24);
+      background: linear-gradient(135deg, #e07000, #f59e0b);
+      box-shadow: 0 10px 24px rgba(224, 112, 0, .24);
     }
 
     .brand-mark svg,
@@ -204,7 +204,7 @@
     .primary-btn {
       color: white;
       background: var(--teal);
-      box-shadow: 0 10px 22px rgba(159, 18, 57, .18);
+      box-shadow: 0 10px 22px rgba(224, 112, 0, .18);
     }
 
     .ghost-btn,
@@ -248,7 +248,7 @@
 
     .side a:hover,
     .side a.active {
-      background: #fff1f2;
+      background: #fff7ed;
       color: var(--teal);
     }
 
@@ -321,8 +321,8 @@
       padding: clamp(20px, 5vw, 46px);
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(127, 29, 29, .94), rgba(180, 83, 9, .9) 52%, rgba(76, 29, 149, .86)),
-        #7f1d1d;
+        linear-gradient(135deg, rgba(194, 86, 0, .96), rgba(245, 158, 11, .9) 58%, rgba(79, 70, 229, .72)),
+        #e07000;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
@@ -547,8 +547,8 @@
       min-height: 26px;
       padding: 5px 8px;
       margin-bottom: 10px;
-      color: #9f1239;
-      background: #ffe4e6;
+      color: #b45309;
+      background: #ffedd5;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
@@ -556,7 +556,7 @@
 
     .tag.strong { color: #4c1d95; background: #ede9fe; }
     .tag.warn { color: #92400e; background: #fef3c7; }
-    .tag.danger { color: #9f1239; background: #ffe4e6; }
+    .tag.danger { color: #9a3412; background: #fed7aa; }
 
     .en-line {
       display: block;
@@ -573,8 +573,8 @@
     .lang-toggle {
       min-width: 72px;
       color: var(--teal);
-      background: #fff1f2;
-      border-color: #fecdd3;
+      background: #fff7ed;
+      border-color: #fed7aa;
       font-weight: 800;
     }
 
@@ -681,8 +681,8 @@
       place-items: center;
       width: 42px;
       height: 42px;
-      color: #9f1239;
-      background: #ffe4e6;
+      color: #b45309;
+      background: #ffedd5;
       border-radius: var(--radius);
       font-size: 13px;
     }
@@ -780,7 +780,7 @@
       margin-bottom: 10px;
       background: var(--teal);
       border-radius: 50%;
-      box-shadow: 0 0 0 5px #ffe4e6;
+      box-shadow: 0 0 0 5px #ffedd5;
     }
 
     .timeline-step time,
@@ -950,6 +950,59 @@
       font-size: 14px;
     }
 
+    .needle-svg {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto 12px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .needle-svg .liver-shape {
+      fill: #fff7ed;
+      stroke: #fdba74;
+      stroke-width: 2;
+    }
+
+    .needle-svg .tumor {
+      fill: #fb923c;
+      stroke: #ea580c;
+      stroke-width: 2;
+    }
+
+    .needle-svg .margin {
+      fill: none;
+      stroke: #e07000;
+      stroke-width: 2;
+      stroke-dasharray: 6 5;
+    }
+
+    .needle-svg .needle-line {
+      stroke: #4f46e5;
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+
+    .needle-svg .field-zone {
+      fill: rgba(245, 158, 11, .18);
+      stroke: rgba(224, 112, 0, .65);
+      stroke-width: 1.5;
+    }
+
+    .needle-svg .vessel {
+      fill: none;
+      stroke: #64748b;
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+
+    .needle-svg text {
+      fill: #6b3f2d;
+      font-size: 11px;
+      font-weight: 800;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+    }
+
     .source-pill {
       display: inline-flex;
       width: fit-content;
@@ -957,7 +1010,7 @@
       align-items: center;
       padding: 4px 8px;
       margin-bottom: 8px;
-      color: #7f1d1d;
+      color: #9a3412;
       background: #ffedd5;
       border-radius: 999px;
       font-size: 12px;
@@ -1011,7 +1064,7 @@
       width: 42px;
       height: 42px;
       color: var(--teal);
-      background: #ffe4e6;
+      background: #ffedd5;
       border-radius: var(--radius);
     }
 
@@ -1068,8 +1121,8 @@
     }
 
     .answer.selected {
-      color: #9f1239;
-      background: #ffe4e6;
+      color: #b45309;
+      background: #ffedd5;
       border-color: #5eead4;
     }
 
@@ -1080,8 +1133,8 @@
     }
 
     .answer.wrong {
-      color: #9f1239;
-      background: #ffe4e6;
+      color: #b45309;
+      background: #ffedd5;
       border-color: #fda4af;
     }
 
@@ -1097,8 +1150,8 @@
       align-items: center;
       min-height: 28px;
       padding: 5px 9px;
-      color: #9f1239;
-      background: #ffe4e6;
+      color: #b45309;
+      background: #ffedd5;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
@@ -1220,7 +1273,7 @@
 
     .bottom-nav a.active {
       color: var(--teal);
-      background: #fff1f2;
+      background: #fff7ed;
       font-weight: 800;
     }
 
@@ -1471,7 +1524,7 @@
         width: 8px;
         height: 8px;
         margin-bottom: 8px;
-        box-shadow: 0 0 0 4px #ffe4e6;
+        box-shadow: 0 0 0 4px #ffedd5;
       }
 
       .timeline-step p {
@@ -1580,7 +1633,7 @@
                 <path d="M103 78c10 25 28 40 56 48 20 6 35 16 46 31" stroke="#8bd7ce" stroke-width="8" fill="none" stroke-linecap="round"></path>
                 <path d="M81 150c25-9 48-7 69 8" stroke="#8bd7ce" stroke-width="7" fill="none" stroke-linecap="round"></path>
                 <circle cx="137" cy="132" r="31" fill="#fb923c" opacity=".92"></circle>
-                <circle cx="137" cy="132" r="49" fill="none" stroke="#9f1239" stroke-width="5" stroke-dasharray="8 8"></circle>
+                <circle cx="137" cy="132" r="49" fill="none" stroke="#e07000" stroke-width="5" stroke-dasharray="8 8"></circle>
                 <path d="M111 48v169M139 55v158M166 67v129" stroke="#f97316" stroke-width="6" stroke-linecap="round"></path>
                 <path d="M64 99c20 4 37 12 51 25" stroke="#4f46e5" stroke-width="8" stroke-linecap="round" fill="none"></path>
               </svg>
@@ -2108,27 +2161,27 @@
 
     const needleData = {
       sizePlans: [
-        { source: "2022 共识", title: "D <= 2 cm", enTitle: "D <= 2 cm", body: "建议 2-3 支电极针。病灶较小时可用 2 针平行置于病灶两侧，以无接触肿瘤方式整体消融。", enBody: "Use 2-3 electrodes. For small tumors, two parallel electrodes can be placed on both sides of the lesion without directly puncturing the tumor." },
-        { source: "2022 共识", title: "2 cm < D <= 3 cm", enTitle: "2 cm < D <= 3 cm", body: "建议 3-4 支；如病灶周围结构复杂、穿刺风险较高，可考虑 2 支电极针并分次/移动消融。", enBody: "Use 3-4 electrodes; if surrounding anatomy is complex or puncture risk is high, consider two electrodes with staged or repositioned ablation." },
-        { source: "2022 共识", title: "3 cm < D <= 4 cm", enTitle: "3 cm < D <= 4 cm", body: "建议 3-5 支电极针，沿病灶长轴和形态设计，必要时退针继续消融。", enBody: "Use 3-5 electrodes, planned along the long axis and tumor shape; pull-back ablation may be needed." },
-        { source: "2022 共识", title: "4 cm < D <= 5 cm", enTitle: "4 cm < D <= 5 cm", body: "建议 4-6 支电极针，需严格控制重叠消融范围，同一区域尽量不超过 3 次。", enBody: "Use 4-6 electrodes. Avoid excessive overlap and keep repeat ablations in the same region to no more than three whenever possible." }
+        { source: "2022 共识", diagram: "two", title: "D <= 2 cm", enTitle: "D <= 2 cm", body: "建议 2-3 支电极针。病灶较小时可用 2 针平行置于病灶两侧，以无接触肿瘤方式整体消融。", enBody: "Use 2-3 electrodes. For small tumors, two parallel electrodes can be placed on both sides of the lesion without directly puncturing the tumor." },
+        { source: "2022 共识", diagram: "three", title: "2 cm < D <= 3 cm", enTitle: "2 cm < D <= 3 cm", body: "建议 3-4 支；如病灶周围结构复杂、穿刺风险较高，可考虑 2 支电极针并分次/移动消融。", enBody: "Use 3-4 electrodes; if surrounding anatomy is complex or puncture risk is high, consider two electrodes with staged or repositioned ablation." },
+        { source: "2022 共识", diagram: "five", title: "3 cm < D <= 4 cm", enTitle: "3 cm < D <= 4 cm", body: "建议 3-5 支电极针，沿病灶长轴和形态设计，必要时退针继续消融。", enBody: "Use 3-5 electrodes, planned along the long axis and tumor shape; pull-back ablation may be needed." },
+        { source: "2022 共识", diagram: "six", title: "4 cm < D <= 5 cm", enTitle: "4 cm < D <= 5 cm", body: "建议 4-6 支电极针，需严格控制重叠消融范围，同一区域尽量不超过 3 次。", enBody: "Use 4-6 electrodes. Avoid excessive overlap and keep repeat ablations in the same region to no more than three whenever possible." }
       ],
       rules: [
-        { source: "2022 共识", title: "有效针距", enTitle: "Effective spacing", body: "电极针之间有效消融间距建议 1.5-2.2 cm，至少保证两两平行，使消融范围覆盖病灶并超过边缘约 0.5 cm。", enBody: "Recommended effective spacing is 1.5-2.2 cm. Keep paired electrodes parallel and cover the lesion plus about 0.5 cm margin." },
-        { source: "2023 指南", title: "超声引导 2-3 针为主", enTitle: "US guidance usually uses 2-3 needles", body: "超声视野和肋间隙限制下，多选择 2-3 根电极针；2 针适合最大径 <= 2 cm，3 针适合 > 2 cm 病灶组合覆盖。", enBody: "Under ultrasound guidance, 2-3 electrodes are commonly used. Two needles fit lesions <= 2 cm; three needles combine paired ablation zones for lesions > 2 cm." },
-        { source: "2023 指南", title: "2 针方案", enTitle: "Two-needle strategy", body: "2 针平行布于病灶两侧，也可通过移动两根针的位置扩大消融范围。", enBody: "Place two parallel electrodes on both sides of the lesion; moving both needles can enlarge the ablation zone." },
-        { source: "2023 指南", title: "3 针方案", enTitle: "Three-needle strategy", body: "3 针之间两两形成消融区域，组合覆盖较大病灶；也可移动第 3 根针调整消融范围。", enBody: "Three needles create paired ablation zones that combine to cover larger lesions; the third needle can be repositioned to reshape coverage." },
-        { source: "2022 共识", title: "不规则病灶", enTitle: "Irregular lesions", body: "尽量避开其他脏器及血管，沿病灶长轴布针；一次消融后可退针继续，但重叠消融不宜过大。", enBody: "Avoid adjacent organs and vessels, place electrodes along the long axis, and use pull-back ablation with limited overlap." },
-        { source: "2022 共识", title: "重要结构旁", enTitle: "Near critical structures", body: "靠近血管、胆囊、肠管时，避免针尖垂直接触重要结构；避免电极针紧贴血管壁，以减少机械或热损伤。", enBody: "Near vessels, gallbladder, or bowel, avoid perpendicular contact with critical structures and avoid placing electrodes tightly against vessel walls." },
-        { source: "2022 共识", title: "CT 引导", enTitle: "CT guidance", body: "CT 下可用三维重建明确病灶、脏器和消融针关系；穿刺采用“步进式”进针，避免穿过胸腔造成肺损伤。", enBody: "CT allows 3D planning; use stepwise advancement and avoid transpleural routes when possible." },
-        { source: "2022/2023", title: "超声与辅助技术", enTitle: "Ultrasound and adjuncts", body: "超声可实时监测角度和深度；显示不清或膈顶部病灶可用人工液腹/液胸、融合导航和超声造影辅助。", enBody: "Ultrasound offers real-time needle tracking; artificial ascites/pleural effusion, fusion navigation, and CEUS can assist difficult lesions." }
+        { source: "2022 共识", diagram: "spacing", title: "有效针距", enTitle: "Effective spacing", body: "电极针之间有效消融间距建议 1.5-2.2 cm，至少保证两两平行，使消融范围覆盖病灶并超过边缘约 0.5 cm。", enBody: "Recommended effective spacing is 1.5-2.2 cm. Keep paired electrodes parallel and cover the lesion plus about 0.5 cm margin." },
+        { source: "2023 指南", diagram: "three", title: "超声引导 2-3 针为主", enTitle: "US guidance usually uses 2-3 needles", body: "超声视野和肋间隙限制下，多选择 2-3 根电极针；2 针适合最大径 <= 2 cm，3 针适合 > 2 cm 病灶组合覆盖。", enBody: "Under ultrasound guidance, 2-3 electrodes are commonly used. Two needles fit lesions <= 2 cm; three needles combine paired ablation zones for lesions > 2 cm." },
+        { source: "2023 指南", diagram: "two", title: "2 针方案", enTitle: "Two-needle strategy", body: "2 针平行布于病灶两侧，也可通过移动两根针的位置扩大消融范围。", enBody: "Place two parallel electrodes on both sides of the lesion; moving both needles can enlarge the ablation zone." },
+        { source: "2023 指南", diagram: "three", title: "3 针方案", enTitle: "Three-needle strategy", body: "3 针之间两两形成消融区域，组合覆盖较大病灶；也可移动第 3 根针调整消融范围。", enBody: "Three needles create paired ablation zones that combine to cover larger lesions; the third needle can be repositioned to reshape coverage." },
+        { source: "2022 共识", diagram: "longAxis", title: "不规则病灶", enTitle: "Irregular lesions", body: "尽量避开其他脏器及血管，沿病灶长轴布针；一次消融后可退针继续，但重叠消融不宜过大。", enBody: "Avoid adjacent organs and vessels, place electrodes along the long axis, and use pull-back ablation with limited overlap." },
+        { source: "2022 共识", diagram: "critical", title: "重要结构旁", enTitle: "Near critical structures", body: "靠近血管、胆囊、肠管时，避免针尖垂直接触重要结构；避免电极针紧贴血管壁，以减少机械或热损伤。", enBody: "Near vessels, gallbladder, or bowel, avoid perpendicular contact with critical structures and avoid placing electrodes tightly against vessel walls." },
+        { source: "2022 共识", diagram: "step", title: "CT 引导", enTitle: "CT guidance", body: "CT 下可用三维重建明确病灶、脏器和消融针关系；穿刺采用“步进式”进针，避免穿过胸腔造成肺损伤。", enBody: "CT allows 3D planning; use stepwise advancement and avoid transpleural routes when possible." },
+        { source: "2022/2023", diagram: "adjunct", title: "超声与辅助技术", enTitle: "Ultrasound and adjuncts", body: "超声可实时监测角度和深度；显示不清或膈顶部病灶可用人工液腹/液胸、融合导航和超声造影辅助。", enBody: "Ultrasound offers real-time needle tracking; artificial ascites/pleural effusion, fusion navigation, and CEUS can assist difficult lesions." }
       ],
       parameters: [
-        { title: "裸露段", enTitle: "Exposure", body: "常用 1.5-2.0 cm；肝门部脉管丰富、结构不均匀时建议 1.5 cm。", enBody: "Usually 1.5-2.0 cm; use 1.5 cm near the hepatic hilum." },
-        { title: "电场强度", enTitle: "Field strength", body: "共识多选 1500-2800 V/cm；超声指南按 NanoKnife 示例为 1000-3000 V/cm。", enBody: "Consensus: often 1500-2800 V/cm; ultrasound guideline example: 1000-3000 V/cm." },
-        { title: "针间距", enTitle: "Needle spacing", body: "共识有效间距 1.5-2.2 cm；超声指南示例 1.2-2.4 cm。", enBody: "Consensus: 1.5-2.2 cm effective spacing; US guideline example: 1.2-2.4 cm." },
-        { title: "脉宽/脉冲数", enTitle: "Pulse width/count", body: "脉宽 70-90 μs；脉冲数约 70-100 个，超声指南示例 70-90 个。", enBody: "Pulse width 70-90 μs; pulse count about 70-100, with 70-90 in the US guideline example." },
-        { title: "测试电流", enTitle: "Test current", body: "先测 10-20 个脉冲；共识提示 25-45 A 且逐渐上升较合理，超声指南提示正式消融后 30-50 A。", enBody: "Test with 10-20 pulses; consensus suggests 25-45 A with an increasing trend, while the US guideline cites 30-50 A during formal ablation." }
+        { diagram: "exposure", title: "裸露段", enTitle: "Exposure", body: "常用 1.5-2.0 cm；肝门部脉管丰富、结构不均匀时建议 1.5 cm。", enBody: "Usually 1.5-2.0 cm; use 1.5 cm near the hepatic hilum." },
+        { diagram: "field", title: "电场强度", enTitle: "Field strength", body: "共识多选 1500-2800 V/cm；超声指南按 NanoKnife 示例为 1000-3000 V/cm。", enBody: "Consensus: often 1500-2800 V/cm; ultrasound guideline example: 1000-3000 V/cm." },
+        { diagram: "spacing", title: "针间距", enTitle: "Needle spacing", body: "共识有效间距 1.5-2.2 cm；超声指南示例 1.2-2.4 cm。", enBody: "Consensus: 1.5-2.2 cm effective spacing; US guideline example: 1.2-2.4 cm." },
+        { diagram: "pulse", title: "脉宽/脉冲数", enTitle: "Pulse width/count", body: "脉宽 70-90 μs；脉冲数约 70-100 个，超声指南示例 70-90 个。", enBody: "Pulse width 70-90 μs; pulse count about 70-100, with 70-90 in the US guideline example." },
+        { diagram: "current", title: "测试电流", enTitle: "Test current", body: "先测 10-20 个脉冲；共识提示 25-45 A 且逐渐上升较合理，超声指南提示正式消融后 30-50 A。", enBody: "Test with 10-20 pulses; consensus suggests 25-45 A with an increasing trend, while the US guideline cites 30-50 A during formal ablation." }
       ]
     };
 
@@ -2372,6 +2425,55 @@
       `).join("");
     }
 
+    function needleSvg(type = "two") {
+      const patterns = {
+        two: { pins: [[74, 52], [126, 52]], zones: [[100, 90, 44, 64]], label: "2 needles" },
+        three: { pins: [[68, 58], [132, 58], [100, 128]], zones: [[100, 88, 58, 68]], label: "3 needles" },
+        five: { pins: [[70, 48], [130, 48], [58, 112], [142, 112], [100, 148]], zones: [[100, 98, 72, 82]], label: "3-5 needles" },
+        six: { pins: [[62, 46], [100, 36], [138, 46], [58, 126], [100, 154], [142, 126]], zones: [[100, 96, 82, 94]], label: "4-6 needles" },
+        spacing: { pins: [[76, 60], [124, 60]], zones: [[100, 95, 45, 72]], label: "1.5-2.2 cm", measure: true },
+        longAxis: { pins: [[72, 38], [102, 50], [132, 62]], zones: [[100, 98, 70, 46]], label: "long axis", long: true },
+        critical: { pins: [[74, 56], [126, 56]], zones: [[100, 94, 48, 64]], label: "avoid vessel", vessel: true },
+        step: { pins: [[70, 42], [92, 70], [114, 98], [136, 126]], zones: [[104, 94, 54, 64]], label: "stepwise", step: true },
+        adjunct: { pins: [[72, 58], [128, 58], [100, 126]], zones: [[100, 90, 58, 66]], label: "US + fusion", adjunct: true },
+        exposure: { pins: [[88, 42], [112, 42]], zones: [[100, 92, 34, 70]], label: "1.5-2.0 cm", exposure: true },
+        field: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "V/cm", field: true },
+        pulse: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "70-90 μs", pulse: true },
+        current: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "A", current: true }
+      };
+      const p = patterns[type] || patterns.two;
+      const needleLines = p.pins.map(([x, y], index) => {
+        const x2 = p.long ? x + 22 : p.step ? x + 22 : x + 8;
+        const y2 = p.long ? y + 104 : p.step ? y + 34 : y + 104;
+        return `<line class="needle-line" x1="${x}" y1="${y}" x2="${x2}" y2="${y2}"></line><text x="${x - 7}" y="${y - 8}">N${index + 1}</text>`;
+      }).join("");
+      const zones = p.zones.map(([cx, cy, rx, ry]) => `<ellipse class="field-zone" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"></ellipse>`).join("");
+      const measure = p.measure ? '<line x1="80" y1="42" x2="128" y2="42" stroke="#e07000" stroke-width="2"></line><text x="73" y="34">1.5-2.2 cm</text>' : "";
+      const vessel = p.vessel ? '<path class="vessel" d="M42 128 C75 106 105 126 156 101"></path><text x="33" y="150">vessel / bile duct</text>' : "";
+      const adjunct = p.adjunct ? '<path d="M45 54 C69 38 126 32 158 52" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 4"></path><text x="44" y="40">fusion / CEUS</text>' : "";
+      const exposure = p.exposure ? '<line x1="92" y1="72" x2="100" y2="132" stroke="#f59e0b" stroke-width="9" stroke-linecap="round"></line><text x="62" y="160">exposed tip</text>' : "";
+      const pulseBits = p.pulse ? '<path d="M82 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path><path d="M114 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path>' : "";
+      const current = p.current ? '<path d="M68 136 C88 116 108 150 130 128" fill="none" stroke="#e07000" stroke-width="3"></path><text x="62" y="158">25-50 A</text>' : "";
+      const field = p.field ? '<path d="M74 118 C92 76 112 76 130 118" fill="none" stroke="#e07000" stroke-width="3"></path><text x="67" y="153">electric field</text>' : "";
+      return `
+        <svg class="needle-svg" viewBox="0 0 200 200" role="img" aria-label="Needle placement diagram">
+          <path class="liver-shape" d="M38 100c0-42 36-66 78-64 34 2 58 15 70 39 10 20 5 49-14 68-27 27-77 34-109 12-17-12-25-31-25-55Z"></path>
+          ${zones}
+          <ellipse class="margin" cx="100" cy="96" rx="50" ry="55"></ellipse>
+          <ellipse class="tumor" cx="100" cy="96" rx="28" ry="31"></ellipse>
+          ${vessel}
+          ${adjunct}
+          ${measure}
+          ${exposure}
+          ${field}
+          ${pulseBits}
+          ${current}
+          ${needleLines}
+          <text x="48" y="188">${p.label}</text>
+        </svg>
+      `;
+    }
+
     function renderNeedlePlans() {
       const wrap = document.getElementById("needlePlans");
       if (!wrap) return;
@@ -2380,6 +2482,7 @@
           ${needleData.sizePlans.map(item => `
             <article class="needle-plan-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
               <span class="source-pill">${item.source}</span>
+              ${needleSvg(item.diagram)}
               <strong>${item.title}${bi(item.enTitle)}</strong>
               <span>${item.body}${bi(item.enBody)}</span>
             </article>
@@ -2389,6 +2492,7 @@
           ${needleData.rules.map(item => `
             <article class="needle-rule-card searchable" data-text="${item.source} ${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
               <span class="source-pill">${item.source}</span>
+              ${needleSvg(item.diagram)}
               <strong>${item.title}${bi(item.enTitle)}</strong>
               <span>${item.body}${bi(item.enBody)}</span>
             </article>
@@ -2398,6 +2502,7 @@
           ${needleData.parameters.map(item => `
             <article class="needle-param-card searchable" data-text="${item.title} ${item.body} ${item.enTitle} ${item.enBody}">
               <span class="source-pill">参数 / Parameters</span>
+              ${needleSvg(item.diagram)}
               <strong>${item.title}${bi(item.enTitle)}</strong>
               <span>${item.body}${bi(item.enBody)}</span>
             </article>
