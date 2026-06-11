@@ -1083,6 +1083,113 @@
     .legend-dot.blue { background: #4f46e5; }
     .legend-dot.red { background: #ef4444; }
 
+    .needle-planner {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      margin: 14px 0;
+      background: #fffaf4;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .planner-form {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-items: end;
+    }
+
+    .planner-field {
+      display: grid;
+      gap: 6px;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .planner-field input,
+    .planner-field select {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 10px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .planner-field input:focus,
+    .planner-field select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(224, 112, 0, .14);
+    }
+
+    .planner-checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .planner-checks label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .planner-result {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      min-height: 170px;
+      padding: 14px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .planner-result h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .planner-result p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .planner-result ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .planner-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .planner-badge {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      padding: 4px 8px;
+      color: #9a3412;
+      background: #ffedd5;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
     .timeline {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1396,6 +1503,7 @@
       .needle-rule-grid,
       .needle-param-grid,
       .needle-figure-grid,
+      .planner-form,
       .timeline,
       .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1576,6 +1684,8 @@
       .needle-rule-grid,
       .needle-param-grid,
       .needle-figure-grid,
+      .planner-form,
+      .planner-result,
       .mini-diagram {
         grid-template-columns: 1fr;
       }
@@ -1911,6 +2021,47 @@
                   <p>根治性治疗中消融区应完全覆盖病灶及周围 0.5 cm 以上。两针裸露段之间形成有效消融区域，针要尽量两两平行、深度一致；靠近血管、胆囊、肠管时避免针尖垂直接触重要结构。</p>
                   <p class="en-line">For curative ablation, the ablation zone should cover the tumor plus at least a 0.5 cm safety margin. The effective ablation zone forms between paired parallel electrodes.</p>
                 </div>
+              </div>
+              <div class="needle-planner searchable" data-text="布针建议 计算器 肿瘤大小 最大径 cm 电极针 数量 超声 CT 高危部位">
+                <div class="section-head" style="margin:0">
+                  <div>
+                    <p class="eyebrow">布针建议计算器</p>
+                    <h2>输入肿瘤大小，生成布针建议</h2>
+                    <p class="section-copy">按指南/共识的病灶大小、电极针数、超声 2-3 针限制和高危部位注意事项生成培训用建议。</p>
+                    <p class="en-line">Enter tumor size to generate a training recommendation for electrode number, layout strategy, and parameter reminders.</p>
+                  </div>
+                </div>
+                <div class="planner-form">
+                  <label class="planner-field" for="tumorSizeInput">
+                    最大径 D（cm）
+                    <input id="tumorSizeInput" type="number" min="0.1" max="10" step="0.1" value="2.0">
+                  </label>
+                  <label class="planner-field" for="lesionCountInput">
+                    病灶数
+                    <input id="lesionCountInput" type="number" min="1" max="10" step="1" value="1">
+                  </label>
+                  <label class="planner-field" for="guidanceInput">
+                    引导方式
+                    <select id="guidanceInput">
+                      <option value="us">超声引导 / Ultrasound</option>
+                      <option value="ct">CT 引导 / CT</option>
+                      <option value="either">未定 / Either</option>
+                    </select>
+                  </label>
+                  <label class="planner-field" for="intentInput">
+                    治疗目标
+                    <select id="intentInput">
+                      <option value="curative">根治性消融</option>
+                      <option value="palliative">姑息/联合治疗</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="planner-checks">
+                  <label><input id="criticalInput" type="checkbox"> 邻近肝门/血管/胆管/肠道/膈肌</label>
+                  <label><input id="irregularInput" type="checkbox"> 形态不规则或长轴明显</label>
+                  <label><input id="biliaryInput" type="checkbox"> 胆道梗阻或胆道感染风险</label>
+                </div>
+                <div class="planner-result" id="needlePlannerResult" aria-live="polite"></div>
               </div>
               <div class="needle-guide searchable" data-text="肝脏 布针 共识 指南 2针 3针 2-6针 针距 电极针 肝门 胆管 血管 CT 超声">
                 <div class="section-head" style="margin:0">
@@ -2670,6 +2821,99 @@
       `;
     }
 
+    function getNeedleRecommendation(size, count, guidance, intent, critical, irregular, biliary) {
+      const notes = [];
+      const warnings = [];
+      let title = "";
+      let needles = "";
+      let strategy = "";
+      let diagram = "two";
+      let source = "2022 共识 + 2023 指南";
+
+      if (!Number.isFinite(size) || size <= 0) {
+        return {
+          title: "请输入有效的肿瘤最大径",
+          needles: "待计算",
+          strategy: "最大径 D 需为大于 0 的数字。",
+          diagram: "two",
+          source,
+          notes: ["输入单位为 cm。"],
+          warnings: []
+        };
+      }
+
+      if (size <= 2) {
+        title = "小病灶：优先 2 针平行布针";
+        needles = guidance === "us" ? "2 支为主，必要时 3 支" : "2-3 支";
+        strategy = "2 针平行布于病灶两侧，以无接触肿瘤方式整体消融；消融区覆盖病灶及周围 0.5 cm 以上。";
+        diagram = "two";
+      } else if (size <= 3) {
+        title = "中小病灶：3 针组合覆盖";
+        needles = guidance === "us" ? "3 支为主；复杂结构可 2 支分次移动" : "3-4 支";
+        strategy = "3 针之间两两形成消融区，组合覆盖病灶；如高危结构限制穿刺，可考虑 2 针移动/分段消融。";
+        diagram = "three";
+      } else if (size <= 4) {
+        title = "中等病灶：3-5 针或分段退针";
+        needles = guidance === "us" ? "超声下多采用 3 支，需移动/分段覆盖" : "3-5 支";
+        strategy = "沿病灶长轴和形态设计，多针组合或退针继续消融，重叠消融不宜过大。";
+        diagram = "five";
+      } else if (size <= 5) {
+        title = "较大适应证边界内病灶：4-6 针为主";
+        needles = guidance === "us" ? "超声下 2-3 支难一次覆盖，建议分段/多次布针或考虑 CT 辅助" : "4-6 支";
+        strategy = "按病灶形态进行 4-6 针覆盖，严格控制同一区域重复消融次数，尽量不超过 3 次。";
+        diagram = "six";
+      } else {
+        title = "超出常规根治性 IRE 大小范围";
+        needles = "不建议按常规根治性布针直接套用";
+        strategy = "指南/共识常规适应证多以单发 <= 5 cm 为边界；>5 cm 更偏姑息或联合治疗，应多学科评估。";
+        diagram = "six";
+        warnings.push("D > 5 cm：不应仅凭本工具决定布针。");
+      }
+
+      if (count > 3) warnings.push("病灶数 > 3：超出指南常规多发病灶适应证框架。");
+      if (count > 1 && size > 3) warnings.push("多发病灶且最大径 > 3 cm：常规适应证外，应按姑息/联合治疗或 MDT 讨论。");
+      if (guidance === "us" && size > 3) notes.push("超声引导视野和肋间隙限制下，4-6 针同时布针较困难，可用分段移动、融合导航或 CT 辅助。");
+      if (guidance === "ct") notes.push("CT 引导可做三维重建和灵活进针，穿刺建议步进式推进，尽量避免穿过胸腔。");
+      if (critical) {
+        notes.push("邻近肝门/血管/胆管/肠道/膈肌：避免针尖垂直接触重要结构，避免电极针紧贴血管壁。");
+        notes.push("可考虑人工液腹/液胸、融合导航或超声造影辅助显示和避让。");
+      }
+      if (irregular) notes.push("形态不规则：优先沿病灶长轴布针，必要时退针继续消融。");
+      if (biliary) warnings.push("胆道梗阻或胆道感染风险：术前应先考虑胆道支架或经皮胆系引流，并按风险预防感染。");
+      if (intent === "palliative") notes.push("姑息/联合治疗目标下，布针应服务于减瘤、症状控制或联合治疗策略，而非机械追求完全覆盖。");
+      notes.push("参数提醒：裸露段 1.5-2.0 cm；针间距参考 1.5-2.2 cm（超声示例 1.2-2.4 cm）；脉宽 70-90 μs；先测 10-20 个脉冲。");
+
+      return { title, needles, strategy, diagram, source, notes, warnings };
+    }
+
+    function renderNeedlePlanner() {
+      const result = document.getElementById("needlePlannerResult");
+      if (!result) return;
+      const size = Number(document.getElementById("tumorSizeInput")?.value);
+      const count = Number(document.getElementById("lesionCountInput")?.value || 1);
+      const guidance = document.getElementById("guidanceInput")?.value || "us";
+      const intent = document.getElementById("intentInput")?.value || "curative";
+      const critical = Boolean(document.getElementById("criticalInput")?.checked);
+      const irregular = Boolean(document.getElementById("irregularInput")?.checked);
+      const biliary = Boolean(document.getElementById("biliaryInput")?.checked);
+      const rec = getNeedleRecommendation(size, count, guidance, intent, critical, irregular, biliary);
+      result.innerHTML = `
+        <div>${needleSvg(rec.diagram)}</div>
+        <div>
+          <div class="planner-badges">
+            <span class="planner-badge">D=${Number.isFinite(size) ? size.toFixed(1) : "-"} cm</span>
+            <span class="planner-badge">${rec.needles}</span>
+            <span class="planner-badge">${rec.source}</span>
+          </div>
+          <h3>${rec.title}</h3>
+          <p><strong>建议策略：</strong>${rec.strategy}</p>
+          <p><strong>电极针数量：</strong>${rec.needles}</p>
+          ${rec.warnings.length ? `<p><strong>红线提醒：</strong>${rec.warnings.join("；")}</p>` : ""}
+          <ul>${rec.notes.map(note => `<li>${note}</li>`).join("")}</ul>
+        </div>
+      `;
+    }
+
     function getQuizEntry(index = appState.quizIndex) {
       const raw = appState.quizAnswers[index];
       if (raw && typeof raw === "object" && "value" in raw) return raw;
@@ -2974,6 +3218,11 @@
       });
 
       document.body.addEventListener("input", event => {
+        if (event.target.closest("#tumorSizeInput") || event.target.closest("#lesionCountInput")) {
+          renderNeedlePlanner();
+          return;
+        }
+
         const input = event.target.closest("#textAnswer");
         if (!input) return;
         setQuizEntry(input.value, false);
@@ -2981,6 +3230,17 @@
       });
 
       document.body.addEventListener("change", event => {
+        if (
+          event.target.closest("#guidanceInput") ||
+          event.target.closest("#intentInput") ||
+          event.target.closest("#criticalInput") ||
+          event.target.closest("#irregularInput") ||
+          event.target.closest("#biliaryInput")
+        ) {
+          renderNeedlePlanner();
+          return;
+        }
+
         const check = event.target.closest("[data-check]");
         if (!check) return;
         if (check.checked) {
@@ -3072,6 +3332,7 @@
       renderPrep();
       renderNeedlePlans();
       renderNeedleFigures();
+      renderNeedlePlanner();
       renderTimeline();
       renderTerms();
       renderQuiz();
