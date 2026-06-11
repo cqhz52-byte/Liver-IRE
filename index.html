@@ -79,7 +79,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      min-width: 190px;
+      min-width: 260px;
+    }
+
+    .company-logo {
+      display: block;
+      width: 138px;
+      height: auto;
+      flex: none;
     }
 
     .brand-mark {
@@ -1173,6 +1180,10 @@
         min-width: 0;
       }
 
+      .company-logo {
+        width: 116px;
+      }
+
       .brand-mark {
         width: 36px;
         height: 36px;
@@ -1372,9 +1383,7 @@
   <div class="app">
     <header class="topbar">
       <div class="brand" aria-label="IRE 共识轻松学">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-13h-7l0-7Z"></path></svg>
-        </div>
+        <img class="company-logo" src="assets/curaway-logo.png" alt="Curaway">
         <div>
           <p class="brand-title">IRE 共识轻松学</p>
           <p class="brand-subtitle">知识库 · 题库 · SOP</p>
@@ -1738,6 +1747,10 @@
               <p>预防性抗生素需按本院规范判断；NSAIDs 可用于减轻炎症和疼痛风险。</p>
             </article>
             <article class="timeline-step">
+              <time>术中</time>
+              <p>专家共识建议气管插管全麻，术中给予肌松药；麻醉、镇痛、肌松和急救药物由麻醉医生按患者情况执行。</p>
+            </article>
+            <article class="timeline-step">
               <time>术后 3-5 天</time>
               <p>抗生素是否使用依感染风险和医院流程；关注尿路感染、发热、尿痛等提示。</p>
             </article>
@@ -1780,6 +1793,24 @@
               <dl>
                 <div><dt>代表药物</dt><dd>左氧氟沙星、二代/三代头孢等。</dd></div>
                 <div><dt>附件用法</dt><dd>左氧氟沙星 0.5 g po qd，术前 1 天 + 术后 3-5 天。</dd></div>
+              </dl>
+            </article>
+            <article class="med-card searchable" data-text="术中用药 麻醉药物 全身麻醉 气管插管 丙泊酚 七氟烷 瑞芬太尼 舒芬太尼 镇痛 麻醉医生">
+              <span class="tag strong">术中用药</span>
+              <h3>麻醉与镇痛药物</h3>
+              <p>专家共识建议气管插管全身麻醉，但未规定具体麻醉方案。具体诱导、维持和镇痛用药由麻醉医生根据 ASA 分级、心肺功能、肝肾功能和手术时长决定。</p>
+              <dl>
+                <div><dt>常见类别</dt><dd>静脉诱导/维持药、吸入麻醉药、阿片类或其他镇痛药。</dd></div>
+                <div><dt>常见示例</dt><dd>如丙泊酚、七氟烷、瑞芬太尼、舒芬太尼等，仅作类别学习，不作为处方。</dd></div>
+              </dl>
+            </article>
+            <article class="med-card searchable" data-text="术中用药 肌松药 肌松拮抗药 罗库溴铵 顺式阿曲库铵 新斯的明 舒更葡糖 气管插管 电穿孔 肌肉震颤">
+              <span class="tag strong">术中用药</span>
+              <h3>肌松药与肌松拮抗</h3>
+              <p>专家共识明确提到术中给予肌松药，手术结束后建议使用肌松拮抗药。其目的包括配合气管插管、减少电脉冲相关肌肉收缩，并保障操作稳定。</p>
+              <dl>
+                <div><dt>常见类别</dt><dd>非去极化肌松药及其拮抗药。</dd></div>
+                <div><dt>常见示例</dt><dd>如罗库溴铵、顺式阿曲库铵；拮抗可见新斯的明或舒更葡糖等，由麻醉医生决定。</dd></div>
               </dl>
             </article>
             <article class="med-card searchable" data-text="NSAIDs 非甾体抗炎药 塞来昔布 布洛芬 疼痛 炎症 水肿 术前 1天 术后 1-2周">
@@ -2178,6 +2209,30 @@
         options: ["正确", "错误"],
         answer: 1,
         explain: "错误。附件整理认为糖皮质激素不常规使用，仅严重炎症/水肿或特殊高危病例短期酌情。"
+      },
+      {
+        type: "judge",
+        level: "术中用药",
+        q: "专家共识建议前列腺癌 IRE 消融治疗采用气管插管全身麻醉，术中给予肌松药。",
+        options: ["正确", "错误"],
+        answer: 0,
+        explain: "正确。共识在麻醉准备中提到建议气管插管全身麻醉，术中给予肌松药，术毕建议使用肌松拮抗药。"
+      },
+      {
+        type: "multi",
+        level: "术中用药",
+        q: "关于 IRE 术中麻醉与肌松用药，下列哪些表述更合适？",
+        options: ["具体麻醉方案由麻醉医生根据患者情况决定", "肌松药有助于减少电脉冲相关肌肉收缩", "专家共识给出了固定的丙泊酚剂量", "术毕可根据情况使用肌松拮抗药", "麻醉前仍需进行 ASA 分级等评估"],
+        answer: [0, 1, 3, 4],
+        explain: "共识明确麻醉方式和肌松原则，但没有给具体麻醉药剂量。具体药物和剂量应由麻醉医生根据患者情况制定。"
+      },
+      {
+        type: "single",
+        level: "术中用药",
+        q: "下列哪一组更接近“术中麻醉/肌松用药”的学习分类？",
+        options: ["麻醉诱导/维持药、镇痛药、肌松药、肌松拮抗药和急救药物", "5α-还原酶抑制剂、α₁受体阻滞剂、长期口服抗雄激素", "降糖药、降脂药、抗结核药", "疫苗、维生素、外用药膏"],
+        answer: 0,
+        explain: "术中主要关注麻醉、镇痛、肌松、拮抗和急救药物准备；α₁受体阻滞剂和 5α-还原酶抑制剂主要属于围手术期 BPH 用药框架。"
       }
     );
 
