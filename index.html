@@ -977,10 +977,16 @@
       stroke-dasharray: 6 5;
     }
 
-    .needle-svg .needle-line {
-      stroke: #4f46e5;
-      stroke-width: 5;
-      stroke-linecap: round;
+    .needle-svg .needle-dot {
+      fill: #111827;
+      stroke: #f8fafc;
+      stroke-width: 2;
+    }
+
+    .needle-svg .needle-track {
+      fill: #0ea5e9;
+      stroke: #f8fafc;
+      stroke-width: 1.5;
     }
 
     .needle-svg .field-zone {
@@ -2647,36 +2653,37 @@
 
     function needleSvg(type = "two") {
       const patterns = {
-        two: { pins: [[74, 52], [126, 52]], zones: [[100, 90, 44, 64]], label: "2 needles" },
-        three: { pins: [[68, 58], [132, 58], [100, 128]], zones: [[100, 88, 58, 68]], label: "3 needles" },
-        five: { pins: [[70, 48], [130, 48], [58, 112], [142, 112], [100, 148]], zones: [[100, 98, 72, 82]], label: "3-5 needles" },
-        six: { pins: [[62, 46], [100, 36], [138, 46], [58, 126], [100, 154], [142, 126]], zones: [[100, 96, 82, 94]], label: "4-6 needles" },
-        spacing: { pins: [[76, 60], [124, 60]], zones: [[100, 95, 45, 72]], label: "1.5-2.2 cm", measure: true },
-        longAxis: { pins: [[72, 38], [102, 50], [132, 62]], zones: [[100, 98, 70, 46]], label: "long axis", long: true },
-        critical: { pins: [[74, 56], [126, 56]], zones: [[100, 94, 48, 64]], label: "avoid vessel", vessel: true },
-        step: { pins: [[70, 42], [92, 70], [114, 98], [136, 126]], zones: [[104, 94, 54, 64]], label: "stepwise", step: true },
-        adjunct: { pins: [[72, 58], [128, 58], [100, 126]], zones: [[100, 90, 58, 66]], label: "US + fusion", adjunct: true },
-        exposure: { pins: [[88, 42], [112, 42]], zones: [[100, 92, 34, 70]], label: "1.5-2.0 cm", exposure: true },
-        field: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "V/cm", field: true },
-        pulse: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "70-90 μs", pulse: true },
-        current: { pins: [[76, 58], [124, 58]], zones: [[100, 94, 48, 68]], label: "A", current: true }
+        two: { pins: [[72, 94], [128, 94]], zones: [[100, 94, 48, 38]], label: "2-needle top view" },
+        three: { pins: [[70, 72], [130, 72], [100, 132]], zones: [[100, 96, 58, 58]], label: "3-needle top view", links: [[70,72,130,72],[130,72,100,132],[100,132,70,72]] },
+        five: { pins: [[68, 58], [132, 58], [56, 116], [144, 116], [100, 148]], zones: [[100, 102, 76, 74]], label: "3-5 needles top view" },
+        six: { pins: [[62, 54], [100, 42], [138, 54], [58, 126], [100, 154], [142, 126]], zones: [[100, 100, 84, 88]], label: "4-6 needles top view" },
+        spacing: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 46, 40]], label: "1.5-2.2 cm spacing", measure: true },
+        longAxis: { pins: [[64, 82], [100, 96], [136, 110]], zones: [[100, 96, 74, 40]], label: "long-axis top view", long: true },
+        critical: { pins: [[70, 78], [128, 112]], zones: [[100, 96, 52, 46]], label: "avoid structures", vessel: true },
+        step: { pins: [[72, 70], [128, 70], [72, 122], [128, 122]], zones: [[100, 78, 48, 30], [100, 124, 48, 30]], label: "stepwise top view", step: true },
+        adjunct: { pins: [[72, 74], [128, 74], [100, 132]], zones: [[100, 96, 60, 58]], label: "US + fusion", adjunct: true },
+        exposure: { pins: [[82, 96], [118, 96]], zones: [[100, 96, 42, 46]], label: "1.5-2.0 cm active tip", exposure: true },
+        field: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "field strength", field: true },
+        pulse: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "70-90 us pulses", pulse: true },
+        current: { pins: [[76, 94], [124, 94]], zones: [[100, 94, 48, 42]], label: "test current", current: true }
       };
       const p = patterns[type] || patterns.two;
-      const needleLines = p.pins.map(([x, y], index) => {
-        const x2 = p.long ? x + 22 : p.step ? x + 22 : x + 8;
-        const y2 = p.long ? y + 104 : p.step ? y + 34 : y + 104;
-        return `<line class="needle-line" x1="${x}" y1="${y}" x2="${x2}" y2="${y2}"></line><text x="${x - 7}" y="${y - 8}">N${index + 1}</text>`;
+      const links = (p.links || []).map(([x1, y1, x2, y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#e07000" stroke-width="2" stroke-dasharray="4 4"></line>`).join("");
+      const needleDots = p.pins.map(([x, y], index) => {
+        const marker = p.long ? `<ellipse class="needle-track" cx="${x}" cy="${y}" rx="5" ry="9" transform="rotate(72 ${x} ${y})"></ellipse>` : `<circle class="needle-dot" cx="${x}" cy="${y}" r="6"></circle>`;
+        return `${marker}<text x="${x + 8}" y="${y - 8}">N${index + 1}</text>`;
       }).join("");
       const zones = p.zones.map(([cx, cy, rx, ry]) => `<ellipse class="field-zone" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"></ellipse>`).join("");
-      const measure = p.measure ? '<line x1="80" y1="42" x2="128" y2="42" stroke="#e07000" stroke-width="2"></line><text x="73" y="34">1.5-2.2 cm</text>' : "";
-      const vessel = p.vessel ? '<path class="vessel" d="M42 128 C75 106 105 126 156 101"></path><text x="33" y="150">vessel / bile duct</text>' : "";
+      const measure = p.measure ? '<line x1="76" y1="70" x2="124" y2="70" stroke="#e07000" stroke-width="2"></line><path d="M76 65v10M124 65v10" stroke="#e07000" stroke-width="2"></path><text x="67" y="61">1.5-2.2 cm</text>' : "";
+      const vessel = p.vessel ? '<path class="vessel" d="M48 136 C78 104 112 132 156 92"></path><text x="42" y="154">vessel / bile duct</text>' : "";
       const adjunct = p.adjunct ? '<path d="M45 54 C69 38 126 32 158 52" fill="none" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4 4"></path><text x="44" y="40">fusion / CEUS</text>' : "";
-      const exposure = p.exposure ? '<line x1="92" y1="72" x2="100" y2="132" stroke="#f59e0b" stroke-width="9" stroke-linecap="round"></line><text x="62" y="160">exposed tip</text>' : "";
+      const exposure = p.exposure ? '<rect x="70" y="140" width="60" height="12" rx="6" fill="#f59e0b" opacity=".75"></rect><text x="55" y="166">active tip 1.5-2.0 cm</text>' : "";
       const pulseBits = p.pulse ? '<path d="M82 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path><path d="M114 92 h12 l-7 13 h13 l-15 24" fill="none" stroke="#e07000" stroke-width="3" stroke-linejoin="round"></path>' : "";
       const current = p.current ? '<path d="M68 136 C88 116 108 150 130 128" fill="none" stroke="#e07000" stroke-width="3"></path><text x="62" y="158">25-50 A</text>' : "";
       const field = p.field ? '<path d="M74 118 C92 76 112 76 130 118" fill="none" stroke="#e07000" stroke-width="3"></path><text x="67" y="153">electric field</text>' : "";
+      const step = p.step ? '<path d="M72 82v26M128 82v26" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path><path d="M68 104l4 8 4-8M124 104l4 8 4-8" fill="none" stroke="#6b7280" stroke-width="2"></path>' : "";
       return `
-        <svg class="needle-svg" viewBox="0 0 200 200" role="img" aria-label="Needle placement diagram">
+        <svg class="needle-svg" viewBox="0 0 200 200" role="img" aria-label="Planar top-view needle placement diagram">
           <path class="liver-shape" d="M38 100c0-42 36-66 78-64 34 2 58 15 70 39 10 20 5 49-14 68-27 27-77 34-109 12-17-12-25-31-25-55Z"></path>
           ${zones}
           <ellipse class="margin" cx="100" cy="96" rx="50" ry="55"></ellipse>
@@ -2684,11 +2691,13 @@
           ${vessel}
           ${adjunct}
           ${measure}
+          ${links}
           ${exposure}
           ${field}
           ${pulseBits}
           ${current}
-          ${needleLines}
+          ${step}
+          ${needleDots}
           <text x="48" y="188">${p.label}</text>
         </svg>
       `;
@@ -2733,11 +2742,11 @@
 
     function guidelineNeedleFigure(kind, label) {
       const configs = {
-        a: { needles: [[78, 36, 78, 134], [132, 36, 132, 134]], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]], text: "侧视 / side" },
+        a: { needles: [], tumor: "M52 96c0-34 22-52 50-50 28 2 49 20 49 50 0 32-21 51-49 51-30 0-50-19-50-51Z", fields: [[92, 94, 34, 42], [118, 94, 34, 42]], dots: [[70,96],[140,96]], text: "2针俯视 / top" },
         b: { needles: [], tumor: "M47 96c0-24 24-38 56-38s58 14 58 38-26 38-58 38-56-14-56-38Z", fields: [[96, 96, 44, 34], [118, 96, 44, 34]], dots: [[70,96],[140,96]], text: "俯视 / top" },
         c: { needles: [], tumor: "M45 97c0-30 25-48 58-48s60 18 60 48-27 49-60 49-58-19-58-49Z", fields: [[105, 76, 58, 34], [105, 124, 58, 34]], dots: [[70,70],[140,70],[70,126],[140,126]], arrows: true, text: "移动扩大 / shift" },
         d: { needles: [], tumor: "M45 99c0-34 26-54 60-54s60 20 60 54-26 54-60 54-60-20-60-54Z", fields: [[105, 58, 58, 30], [105, 101, 58, 30], [105, 142, 58, 30]], dots: [[70,55],[140,55],[70,99],[140,99],[70,143],[140,143]], arrows: true, text: "分段覆盖 / stacked" },
-        e: { needles: [[62, 36, 62, 134], [105, 36, 105, 134], [148, 36, 148, 134]], tumor: "M42 96c0-35 26-54 63-54s63 19 63 54-26 54-63 54-63-19-63-54Z", fields: [[83, 96, 33, 42], [126, 96, 33, 42]], text: "3 针侧视 / side" },
+        e: { needles: [], tumor: "M42 96c0-35 26-54 63-54s63 19 63 54-26 54-63 54-63-19-63-54Z", fields: [[83, 86, 42, 38], [126, 106, 42, 38]], dots: [[66,96],[105,64],[144,116]], links: [[66,96,105,64],[105,64,144,116],[144,116,66,96]], text: "3针俯视 / top" },
         f: { needles: [], tumor: "M105 45 163 146H47Z", fields: [[105, 105, 50, 47]], dots: [[105,55],[68,132],[142,132]], text: "三角覆盖 / triangle" },
         g: { needles: [], tumor: "M105 32c32 28 52 68 49 107-31 18-68 18-98 0-3-39 17-79 49-107Z", fields: [[105, 96, 52, 74]], dots: [[105,45],[60,105],[150,105],[105,151]], cross: true, text: "移动第3针 / move" },
         h: { needles: [], tumor: "M43 100c28-40 94-56 128 0-34 56-100 40-128 0Z", fields: [[100, 100, 60, 34]], dots: [[60,100],[100,62],[145,100],[100,138]], cross: true, text: "适形覆盖 / conformal" }
@@ -2746,6 +2755,7 @@
       const fields = (c.fields || []).map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="rgba(245,158,11,.34)" stroke="#f59e0b" stroke-width="1.4"></ellipse>`).join("");
       const needles = (c.needles || []).map(([x1,y1,x2,y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#0ea5e9" stroke-width="7" stroke-linecap="round"></line><line x1="${x2}" y1="${y2}" x2="${x2-10}" y2="${y2+24}" stroke="#374151" stroke-width="3" stroke-linecap="round"></line>`).join("");
       const dots = (c.dots || []).map(([x,y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#111827"></circle>`).join("");
+      const links = (c.links || []).map(([x1,y1,x2,y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#9a3412" stroke-width="1.6" stroke-dasharray="4 4"></line>`).join("");
       const arrows = c.arrows ? '<path d="M105 78v35M105 118v25" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
       const cross = c.cross ? '<path d="M55 100h100M105 50v100" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"></path>' : "";
       return `
@@ -2754,7 +2764,7 @@
           <svg viewBox="0 0 210 180" role="img" aria-label="${label}">
             <path d="${c.tumor}" fill="#facc15" opacity=".68" stroke="#f59e0b" stroke-width="2"></path>
             ${fields}
-            ${arrows}${cross}
+            ${arrows}${cross}${links}
             ${needles}${dots}
             <text x="42" y="166" fill="#715a50" font-size="12">${c.text}</text>
           </svg>
@@ -2791,8 +2801,8 @@
       wrap.innerHTML = `
         <section class="needle-figure-board searchable" data-text="指南 图3 a b c d e f g h 2针 3针 电场分布 肝癌">
           <div>
-            <p class="needle-figure-title">指南图示重绘：2 针与 3 针 IRE 电极布针方案</p>
-            <p class="en-line">Redrawn guideline-style diagrams: 2-needle and 3-needle IRE electrode placement patterns.</p>
+            <p class="needle-figure-title">指南图示重绘：2 针与 3 针 IRE 电极平面布针方案</p>
+            <p class="en-line">Redrawn guideline-style top-view diagrams: 2-needle and 3-needle IRE electrode placement patterns.</p>
           </div>
           <div class="needle-figure-grid">
             ${["a","b","c","d","e","f","g","h"].map(key => guidelineNeedleFigure(key, key)).join("")}
@@ -2805,8 +2815,8 @@
         </section>
         <section class="needle-figure-board searchable" data-text="共识 图1 1A 1B 1C 1D 3-6支 电极针 肿瘤 动脉 静脉">
           <div>
-            <p class="needle-figure-title">共识图示重绘：3-6 支电极针与肿瘤、动静脉关系</p>
-            <p class="en-line">Redrawn consensus-style diagrams: relationship between 3-6 electrodes, tumor, artery, and vein.</p>
+            <p class="needle-figure-title">共识图示重绘：3-6 支电极针与肿瘤、动静脉平面关系</p>
+            <p class="en-line">Redrawn consensus-style top-view diagrams: relationship between 3-6 electrodes, tumor, artery, and vein.</p>
           </div>
           <div class="needle-figure-grid">
             ${["a","b","c","d"].map((key, index) => vesselNeedleFigure(key, `1${String.fromCharCode(65 + index)}`)).join("")}
@@ -2908,6 +2918,7 @@
           <h3>${rec.title}</h3>
           <p><strong>建议策略：</strong>${rec.strategy}</p>
           <p><strong>电极针数量：</strong>${rec.needles}</p>
+          <p><strong>图示说明：</strong>下方图示均为平面/俯视布针关系，用于展示电极与肿瘤、血管或胆管的横断面位置，不代表实际进针角度、路径或深度。<span class="en-line">All needle diagrams are planar top-view relationship sketches, not the actual insertion angle, route, or depth.</span></p>
           ${rec.warnings.length ? `<p><strong>红线提醒：</strong>${rec.warnings.join("；")}</p>` : ""}
           <ul>${rec.notes.map(note => `<li>${note}</li>`).join("")}</ul>
         </div>
